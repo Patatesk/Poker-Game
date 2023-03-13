@@ -1,0 +1,34 @@
+{
+    "name": "JoystickController",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "c27e8fdf-0895-4971-aa39-c24993d552c6",
+            "actions": [
+                {
+                    "name": "RotateAndMove",
+                    "type": "Value",
+                    "id": "da5538c8-0f31-45df-8c87-a2758cf6981d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4ab389d0-b72b-48fd-bd60-24fc593320ec",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateAndMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
