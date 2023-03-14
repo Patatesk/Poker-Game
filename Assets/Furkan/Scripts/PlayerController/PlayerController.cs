@@ -18,6 +18,7 @@ namespace PK.PokerGame
         {
             input = new JoystickController();
             characterController = GetComponent<CharacterController>();
+            anim= GetComponent<AnimationController>();
         }
         private void OnEnable()
         {

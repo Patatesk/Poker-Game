@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MoreMountains.Tools;
+using UnityEngine.AI;
+
+namespace PK.PokerGame
+{
+    public class AIMoveRandom : AIAction
+    {
+        [SerializeField] private Collider boundRange;
+        private NavMeshAgent agent;
+        public override void Initialization()
+        {
+            agent= GetComponent<NavMeshAgent>();
+        }
+        public override void PerformAction()
+        {
+            if (!agent.hasPath) GetRandomPointsInBound();
+        }
+
+        private void GetRandomPointsInBound()
+        {
+            float x = Random.Range(boundRange.bounds.min.x, boundRange.bounds.max.x);
+            float z = Random.Range(boundRange.bounds.min.z, boundRange.bounds.max.z);
+            Vector3 move = new Vector3(x, transform.position.y, z);
+            agent.SetDestination(move);
+        }
+    }
+}
