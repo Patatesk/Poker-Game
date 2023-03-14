@@ -10,10 +10,16 @@ namespace PK.PokerGame
     {
         [SerializeField] private Collider boundRange;
         [SerializeField] private NavMeshAgent agent;
-        
+        private AnimationController animator;
+        public override void Initialization()
+        {
+            base.Initialization();
+            animator = transform.root.GetComponent<AnimationController>();
+        }
         public override void PerformAction()
         {
             if (!agent.hasPath) GetRandomPointsInBound();
+            
         }
 
         private void GetRandomPointsInBound()
@@ -22,6 +28,7 @@ namespace PK.PokerGame
             float z = Random.Range(boundRange.bounds.min.z, boundRange.bounds.max.z);
             Vector3 move = new Vector3(x, transform.position.y, z);
             agent.SetDestination(move);
+            animator.MoveAnim();
         }
     }
 }
