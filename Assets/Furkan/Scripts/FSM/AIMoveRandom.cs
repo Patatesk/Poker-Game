@@ -9,11 +9,8 @@ namespace PK.PokerGame
     public class AIMoveRandom : AIAction
     {
         [SerializeField] private Collider boundRange;
-        private NavMeshAgent agent;
-        public override void Initialization()
-        {
-            agent= GetComponent<NavMeshAgent>();
-        }
+        [SerializeField] private NavMeshAgent agent;
+        
         public override void PerformAction()
         {
             if (!agent.hasPath) GetRandomPointsInBound();
