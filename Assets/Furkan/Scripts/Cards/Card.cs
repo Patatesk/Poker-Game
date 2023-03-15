@@ -7,6 +7,8 @@ namespace PK.PokerGame
     public class Card : MonoBehaviour
     {
         public Transform spawnPoint;
+        public CardType cardType;
+        public int cardValue;
 
         private void OnTriggerEnter(Collider other)
         {
