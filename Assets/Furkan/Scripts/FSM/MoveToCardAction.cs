@@ -33,7 +33,7 @@ namespace PK.PokerGame
         {
             if(other.CompareTag("Card"))
             {
-                other.gameObject.SetActive(false);
+                //other.gameObject.SetActive(false);
                 _brain.Target= null;
                 agent.ResetPath();
             }
