@@ -1758,18 +1758,6 @@ MonoBehaviour:
   spawnRate: 1
   totalMaxActiveCardCount: 10
   spawnRotationOffset: {x: -90, y: 0, z: 0}
---- !u!114 &1998626349 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1998626349, guid: d0e43735ebebb6945a78632d14d02114,
-    type: 3}
-  m_PrefabInstance: {fileID: 1359506460912639513}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b10980c4f7324544ac076d6daa6b158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2025206946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2082127854742047840, guid: db2b5b75160e6014aab856941d65883e,
@@ -1960,26 +1948,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1359506459556836883, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: States.Array.data[1].Transitions.array.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1359506459556836883, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: States.Array.data[1].Transitions.array.Array.data[2].Decision
-      value: 
-      objectReference: {fileID: 1998626349}
-    - target: {fileID: 1359506459556836883, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: States.Array.data[1].Transitions.array.Array.data[2].TrueState
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1359506459556836883, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: States.Array.data[1].Transitions.array.Array.data[2].FalseState
-      value: Random
-      objectReference: {fileID: 0}
     - target: {fileID: 1359506459556836894, guid: d0e43735ebebb6945a78632d14d02114,
         type: 3}
       propertyPath: m_Name
@@ -1990,21 +1958,6 @@ PrefabInstance:
       propertyPath: boundRange
       value: 
       objectReference: {fileID: 1328803552}
-    - target: {fileID: 1359506461464913106, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: Label
-      value: MoveToEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1359506461464913106, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: checkRadius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1359506461464913106, guid: d0e43735ebebb6945a78632d14d02114,
-        type: 3}
-      propertyPath: enemyMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0e43735ebebb6945a78632d14d02114, type: 3}
 --- !u!1001 &2082127856211507394
