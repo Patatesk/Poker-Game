@@ -7,5 +7,14 @@ namespace PK.PokerGame
     public class CardManager : MonoBehaviour
     {
         public int totalCardCount;
+
+
+
+        private HandRanker handRanker;
+
+        private void Awake()
+        {
+            handRanker = new HandRanker();
+        }
     }
 }
