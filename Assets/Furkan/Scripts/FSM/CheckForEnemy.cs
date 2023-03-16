@@ -9,7 +9,7 @@ namespace PK.PokerGame
     {
         [SerializeField] private LayerMask enemyMask;
         [SerializeField] private float checkRadius;
-        [SerializeField] private CardManager cardManager;
+        [SerializeField] private HandManager cardManager;
         public override bool Decide()
         {
             if (cardManager.totalCardCount < 5) return false;

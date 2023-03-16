@@ -8,7 +8,7 @@ namespace PK.PokerGame
 
     public class HandRanker 
     {
-        public (int handRank,int biggestNumber) GetHandRank(int[] handValues, CardType[] handSuits)
+        public (int handRank,int biggestNumber) GetHandRank(List<Card> hand)
         {
 
             Dictionary<int, int> valueCounts = new Dictionary<int, int>();
@@ -22,10 +22,10 @@ namespace PK.PokerGame
             int threeOfKind = 0;
 
             // Count the number of occurrences of each value and suit
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < hand.Count; i++)
             {
-                int value = handValues[i];
-                CardType suit = handSuits[i];
+                int value = hand[i].cardValue;
+                CardType suit = hand[i].cardType;
 
                 if (!valueCounts.ContainsKey(value))
                     valueCounts.Add(value, 0);

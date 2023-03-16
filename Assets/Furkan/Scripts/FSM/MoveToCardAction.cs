@@ -9,6 +9,7 @@ namespace PK.PokerGame
     public class MoveToCardAction : AIAction
     {
         [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private HandManager handManager;
         private AnimationController animator;
         public override void Initialization()
         {
@@ -33,9 +34,9 @@ namespace PK.PokerGame
         {
             if(other.CompareTag("Card"))
             {
-                //other.gameObject.SetActive(false);
                 _brain.Target= null;
                 agent.ResetPath();
+                handManager.AddCardToHand(other.GetComponent<Card>());
             }
         }
 
