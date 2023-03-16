@@ -20,6 +20,11 @@ namespace PK.PokerGame
 
         public void AddCardToHand(Card card)
         {
+            if (totalCardCount == 5)
+            {
+                Debug.Log("5 Kart Oldu Seçim Ekranına Geç");
+                return;
+            }
             hand.Add(card);
             var ranking = handRanker.GetHandRank(hand);
             handRank = ranking.handRank;
