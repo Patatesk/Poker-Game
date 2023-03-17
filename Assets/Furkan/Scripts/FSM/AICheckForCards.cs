@@ -9,8 +9,16 @@ namespace PK.PokerGame
     {
         [SerializeField] private LayerMask cardMask;
         [SerializeField] private float checkRadius;
+        private AIStateMachine stateMachine;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            stateMachine = gameObject.GetComponentInParent<AIStateMachine>();
+        }
         public override bool Decide()
         {
+            if (stateMachine.handManager.totalCardCount > 5) return false;
             Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius,cardMask);
 
             if (colliders.Length != 0)

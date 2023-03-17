@@ -11,14 +11,30 @@ namespace PK.PokerGame
         [SerializeField] private string moveParameter;
         [SerializeField] private string idleParameter;
         [SerializeField] private string deadParameter;
-        public void MoveAnim()
+        [SerializeField] private string locomotionParameter;
+        [SerializeField] private float animOfsset;
+
+        private void Start()
+        {
+            animator.applyRootMotion = true;
+        }
+
+        public Vector3 GetRootPos()
+        {
+            Vector3 rootPos = animator.rootPosition;
+            rootPos.y = animOfsset;
+            return rootPos;
+        }
+        public void MoveAnim(bool shouldmove = true, float value = 0)
         {
             if (animator == null) return;
-            animator.SetBool(moveParameter, true);
-            animator.SetBool(idleParameter,false);
+            animator.SetBool(moveParameter, shouldmove);
+            animator.SetBool(idleParameter,!shouldmove);
+            animator.SetFloat(locomotionParameter,value);
         }
         public void IdleAnim()
         {
+            return;
             if (animator == null) return;
             animator.SetBool(idleParameter, true);
             animator.SetBool(moveParameter, false);

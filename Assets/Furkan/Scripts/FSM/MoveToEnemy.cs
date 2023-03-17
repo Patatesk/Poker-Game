@@ -8,25 +8,21 @@ namespace PK.PokerGame
 {
     public class MoveToEnemy : AIAction
     {
-        [SerializeField] private NavMeshAgent agent;
-        private AnimationController animator;
+        [SerializeField] private AIMove move;
+        
         public override void Initialization()
         {
             base.Initialization();
-            animator = transform.root.GetComponent<AnimationController>();
-
         }
         public override void OnEnterState()
         {
             base.OnEnterState();
-            agent.ResetPath();
         }
         public override void PerformAction()
         {
-            if (_brain.Target != null && !agent.hasPath)
+            if (_brain.Target != null)
             {
-                agent.SetDestination(_brain.Target.position);
-                animator.MoveAnim();
+                move.ChangeTargetandMove( _brain.Target);
             }
 
         }

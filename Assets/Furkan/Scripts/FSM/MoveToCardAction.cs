@@ -8,25 +8,29 @@ namespace PK.PokerGame
 {
     public class MoveToCardAction : AIAction
     {
-        [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private HandManager handManager;
-        private AnimationController animator;
+        private AIMove move;
+        private AIStateMachine stateMachine;
+
+        protected override void Awake()
+        {
+            stateMachine = this.gameObject.GetComponentInParent<AIStateMachine>();
+            _brain = stateMachine;
+            move = gameObject.GetComponentInParent<AIMove>();
+        }
         public override void Initialization()
         {
             base.Initialization();
-            animator = transform.root.GetComponent<AnimationController>();
         }
         public override void OnEnterState()
         {
             base.OnEnterState();
-            agent.ResetPath();
+            stateMachine.navMeshAgent.ResetPath();
         }
         public override void PerformAction()
         {
-            if (_brain.Target != null && !agent.hasPath)
+            if (_brain.Target != null && !stateMachine.navMeshAgent.hasPath)
             {
-                agent.SetDestination(_brain.Target.position);
-                animator.MoveAnim();
+                move.ChangeTargetandMove(_brain.Target);
             }
             
         }
@@ -35,8 +39,8 @@ namespace PK.PokerGame
             if(other.CompareTag("Card"))
             {
                 _brain.Target= null;
-                agent.ResetPath();
-                handManager.AddCardToHand(other.GetComponent<Card>());
+                stateMachine.navMeshAgent.ResetPath();
+                stateMachine.handManager.AddCardToHand(other.GetComponent<Card>());
             }
         }
 

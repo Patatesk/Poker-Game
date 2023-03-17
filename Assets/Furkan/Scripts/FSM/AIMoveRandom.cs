@@ -9,26 +9,30 @@ namespace PK.PokerGame
     public class AIMoveRandom : AIAction
     {
         [SerializeField] private Collider boundRange;
-        [SerializeField] private NavMeshAgent agent;
-        private AnimationController animator;
+        [SerializeField] private AIMove move;
+        private  AIStateMachine stateMachine;
+        protected override void Awake()
+        {
+            base.Awake();
+           
+            stateMachine = this.gameObject.GetComponentInParent<AIStateMachine>();
+
+        }
         public override void Initialization()
         {
             base.Initialization();
-            animator = transform.root.GetComponent<AnimationController>();
         }
         public override void PerformAction()
         {
-            if (!agent.hasPath) GetRandomPointsInBound();
-            
+            if (!stateMachine.navMeshAgent.hasPath) GetRandomPointsInBound();
         }
 
         private void GetRandomPointsInBound()
         {
             float x = Random.Range(boundRange.bounds.min.x, boundRange.bounds.max.x);
             float z = Random.Range(boundRange.bounds.min.z, boundRange.bounds.max.z);
-            Vector3 move = new Vector3(x, transform.position.y, z);
-            agent.SetDestination(move);
-            animator.MoveAnim();
+            Vector3 _move = new Vector3(x, transform.position.y, z);
+            move.MoveToPos(_move);
         }
     }
 }
