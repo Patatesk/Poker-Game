@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-namespace PK.PokerGame
+namespace PK.Tools
 {
     public static class PKCheckListSortedByValue 
     {

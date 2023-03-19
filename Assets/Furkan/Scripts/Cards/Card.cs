@@ -9,6 +9,18 @@ namespace PK.PokerGame
         public Transform spawnPoint;
         public CardType cardType;
         public int cardValue;
+        private bool useForUI;
+        public bool forUI
+        {
+            get
+            {
+                return useForUI;
+            }
+            set
+            {
+                useForUI = value;
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
