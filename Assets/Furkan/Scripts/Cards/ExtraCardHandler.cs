@@ -11,6 +11,7 @@ namespace PK.PokerGame
     {
         private Mediator mediator;
         private Action<Card> addCardToTheHand;
+        [SerializeField] private GameObject textHelper;
 
         private Card CurrentCard;
         private void Awake()
@@ -33,6 +34,7 @@ namespace PK.PokerGame
         {
             if(CurrentCard != null)
             {
+                CurrentCard.discardFeedback.PlayFeedbacks();
                 CurrentCard = null;
                 addCardToTheHand = null;
             }
@@ -41,9 +43,16 @@ namespace PK.PokerGame
             request.type = card.cardType;
             request.chooseCardTransform = this.transform;
             addCardToTheHand = _addCardToTheHand;
-            CurrentCard = card;
             mediator.Publish(request);
             ChooseModeSignal.Trigger(true);
+            textHelper.SetActive(true);
+        }
+        private void OnTransformChildrenChanged()
+        {
+            if(transform.childCount > 0)
+            {
+                CurrentCard = transform.GetChild(0).GetComponent<Card>();
+            }
         }
         private void AddOrDiscardExtraCard(AddExtraCardToHandOrDiscard _addExtraCardToHandOrDiscard)
         {
@@ -63,6 +72,8 @@ namespace PK.PokerGame
                 addCardToTheHand = null;
             }
             ChooseModeSignal.Trigger(false);
+            textHelper.SetActive(false);
+
         }
     }
 

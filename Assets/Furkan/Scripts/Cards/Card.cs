@@ -15,7 +15,7 @@ namespace PK.PokerGame
         public int cardValue;
         private Mediator mediator;
         private bool useForUI;
-       [SerializeField] private MMF_Player discardFeedback;
+        public MMF_Player discardFeedback;
         private bool canChoose;
         public bool forUI
         {
@@ -35,6 +35,7 @@ namespace PK.PokerGame
         public void Discard()
         {
             DiscardCardSignal.Trigger(this);
+            transform.SetParent(transform.root);
         }
         private void OnEnable()
         {

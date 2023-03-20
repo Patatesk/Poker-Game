@@ -12,7 +12,7 @@ namespace PK.PokerGame
         [SerializeField] private GameObject[] DiamondCardPrefabs;
         [SerializeField] private GameObject[] ClubCardPrefabs;
         [SerializeField] private GameObject[] HeartCardPrefabs;
-
+        [SerializeField] private Transform spawnPoint;
         private Mediator mediator;
         private void Awake()
         {
@@ -30,7 +30,7 @@ namespace PK.PokerGame
 
         private void SetHand(RequestCard request)
         {
-            GameObject card = Instantiate(FindCard(request.type, request.cardValue), Vector3.zero, Quaternion.identity);
+            GameObject card = Instantiate(FindCard(request.type, request.cardValue), spawnPoint);
             Card script = card.GetComponent<Card>();
             script.forUI = true;
             card.SetActive(false);

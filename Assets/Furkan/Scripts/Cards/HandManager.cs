@@ -70,7 +70,6 @@ namespace PK.PokerGame
         private void Discard(Card card)
         {
             if (!isPlayer) return;
-            card.transform.SetParent(null);
             hand.Remove(card); 
         }
         private void GetRandomTwoCard()
