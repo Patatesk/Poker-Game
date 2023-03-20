@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 8446913776059527940}
   - component: {fileID: 6225096549181106063}
   - component: {fileID: 7394218632892347537}
+  - component: {fileID: 1433298248132362769}
   m_Layer: 6
   m_Name: Karo 3
   m_TagString: Card
@@ -459,6 +460,22 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   cardType: 1
   cardValue: 3
+--- !u!114 &1433298248132362769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639009768143228872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef3e0eb1054444469fffd83111a2682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationSpeed: 5
+  _animatePosition: 1
+  _animateRotation: 1
+  _animateScale: 0
 --- !u!1 &3958459714449609503
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +688,7 @@ GameObject:
   - component: {fileID: 7697224224903976537}
   - component: {fileID: 7847051240533368377}
   - component: {fileID: 7217636806003616941}
+  - component: {fileID: 1070951791}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -687,7 +705,7 @@ RectTransform:
   m_GameObject: {fileID: 7936587429061757857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1170001}
-  m_LocalScale: {x: 0.015560872, y: 0.025818853, z: 0.01889}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3489035603621915777}
@@ -696,7 +714,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00000083447, y: 0.00000059605}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7847051240533368377
 CanvasRenderer:
@@ -736,6 +754,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1070951791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7936587429061757857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.7
 --- !u!1 &7940220381511922335
 GameObject:
   m_ObjectHideFlags: 0

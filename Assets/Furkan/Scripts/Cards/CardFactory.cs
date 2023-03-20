@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PK.Tools;
+using System;
 
 namespace PK.PokerGame
 {
@@ -29,9 +30,10 @@ namespace PK.PokerGame
 
         private void SetHand(RequestCard request)
         {
-            GameObject card = Instantiate(FindCard(request.type, request.cardValue));
+            GameObject card = Instantiate(FindCard(request.type, request.cardValue),Vector3.zero,Quaternion.identity);
             Card script= card.GetComponent<Card>();
             script.forUI = true;
+            card.SetActive(false);
             if (request.hand != null)
             {
                 card.transform.SetParent(request.hand.transform.GetChild(0));
@@ -43,6 +45,10 @@ namespace PK.PokerGame
                 card.transform.SetParent(request.chooseCardTransform);
                 card.SetActive(true);
             }
+            else if(request.hand == null && request.chooseCardTransform == null)
+            {
+                request.addCardToHand.Invoke(script);
+            }
 
         }
 
@@ -53,16 +59,16 @@ namespace PK.PokerGame
             switch (type)
             {
                 case CardType.Spade:
-                    card = SpadeCardPrefabs[cardValue-1];
+                    card = SpadeCardPrefabs[cardValue-2];
                     break;
                 case CardType.Diamond:
-                    card= DiamondCardPrefabs[cardValue-1];
+                    card= DiamondCardPrefabs[cardValue-2];
                     break;
                 case CardType.Clube:
-                    card= ClubCardPrefabs[cardValue-1];
+                    card= ClubCardPrefabs[cardValue-2];
                     break;
                 case CardType.Heart:
-                    card= HeartCardPrefabs[cardValue-1];
+                    card= HeartCardPrefabs[cardValue-2];
                     break;
             }
             return card;
@@ -75,5 +81,6 @@ namespace PK.PokerGame
         public int cardValue;
         public HandChildHandler hand;
         public Transform chooseCardTransform;
+        public System.Action<Card> addCardToHand;
     }
 }
