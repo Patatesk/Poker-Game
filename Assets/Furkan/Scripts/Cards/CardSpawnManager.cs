@@ -18,8 +18,10 @@ namespace PK.PokerGame
         private Queue<Transform> SpawnTransformsQueue = new Queue<Transform>();
         private WaitForSeconds spawnTime;
         private int acitveCardCount;
+        private GameObject parent;
         private void Awake()
         {
+            parent = new GameObject("CardPoolParent");
             GetAllChilds();
             AddAllCardsToQueue();
             spawnTime = new WaitForSeconds(spawnRate);
@@ -34,8 +36,9 @@ namespace PK.PokerGame
             GetBackQueueSignal.GetBack -= ReturnQueue;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(1);
             StartCoroutine(CardSpawner());
         }
         private IEnumerator CardSpawner()
@@ -80,6 +83,7 @@ namespace PK.PokerGame
             {
                 GameObject cardToAdd = Instantiate(card);
                 cardToAdd.SetActive(false);
+                cardToAdd.transform.SetParent(parent.transform);
                 spawnQueue.Enqueue(cardToAdd);
             }
         }

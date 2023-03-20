@@ -25,6 +25,14 @@ namespace PK.PokerGame
             handRanker = new HandRanker();
             mediator = GameObject.FindObjectOfType<Mediator>();
         }
+        private void OnEnable()
+        {
+            DiscardCardSignal.Discard += Discard;
+        }
+        private void OnDisable()
+        {
+            DiscardCardSignal.Discard -= Discard;
+        }
 
         private  IEnumerator Start()
         {
@@ -35,16 +43,19 @@ namespace PK.PokerGame
         {
             if (totalCardCount == 5)
             {
-                Debug.Log("5 Kart Oldu Seçim Ekranýna Geç");
+                ExtraCardCollectedSginal.Trigger(card,AddCardToHandRankHand);
                 return;
             }
+            AddCardToHandRankHand(card);
+            PublishCard(card);
+            totalCardCount++;
+        }
+        private void AddCardToHandRankHand(Card card)
+        {
             hand.Add(card);
             var ranking = handRanker.GetHandRank(hand);
             handRank = ranking.handRank;
             ranksBiggestNumber = ranking.biggestNumber;
-            PublishCard(card);
-            totalCardCount++;
-            Debug.Log("Player", this);
         }
         private void PublishCard(Card card)
         {
@@ -55,6 +66,12 @@ namespace PK.PokerGame
             request.type = card.cardType;
             request.chooseCardTransform = null;
             mediator.Publish(request);
+        }
+        private void Discard(Card card)
+        {
+            if (!isPlayer) return;
+            card.transform.SetParent(null);
+            hand.Remove(card); 
         }
         private void GetRandomTwoCard()
         {
@@ -69,10 +86,18 @@ namespace PK.PokerGame
                 request.hand = null;
                 request.chooseCardTransform = null;
                 mediator.Publish(request);
-                Debug.Log("Player");
             }
-            
         }
 
     }
+
+    public class DiscardCardSignal
+    {
+        public static event System.Action<Card> Discard;
+        public static void Trigger(Card card)
+        {
+            Discard?.Invoke(card);
+        }
+    }
+    
 }

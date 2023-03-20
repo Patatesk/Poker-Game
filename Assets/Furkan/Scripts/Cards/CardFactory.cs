@@ -30,8 +30,8 @@ namespace PK.PokerGame
 
         private void SetHand(RequestCard request)
         {
-            GameObject card = Instantiate(FindCard(request.type, request.cardValue),Vector3.zero,Quaternion.identity);
-            Card script= card.GetComponent<Card>();
+            GameObject card = Instantiate(FindCard(request.type, request.cardValue), Vector3.zero, Quaternion.identity);
+            Card script = card.GetComponent<Card>();
             script.forUI = true;
             card.SetActive(false);
             if (request.hand != null)
@@ -40,12 +40,12 @@ namespace PK.PokerGame
                 card.transform.SetSiblingIndex(request.hand.ReturnEmptySpace());
                 card.SetActive(true);
             }
-            else if(request.chooseCardTransform != null)
+            else if (request.chooseCardTransform != null)
             {
                 card.transform.SetParent(request.chooseCardTransform);
                 card.SetActive(true);
             }
-            else if(request.hand == null && request.chooseCardTransform == null)
+            else if (request.hand == null && request.chooseCardTransform == null)
             {
                 request.addCardToHand.Invoke(script);
             }
@@ -59,16 +59,16 @@ namespace PK.PokerGame
             switch (type)
             {
                 case CardType.Spade:
-                    card = SpadeCardPrefabs[cardValue-2];
+                    card = SpadeCardPrefabs[cardValue - 2];
                     break;
                 case CardType.Diamond:
-                    card= DiamondCardPrefabs[cardValue-2];
+                    card = DiamondCardPrefabs[cardValue - 2];
                     break;
                 case CardType.Clube:
-                    card= ClubCardPrefabs[cardValue-2];
+                    card = ClubCardPrefabs[cardValue - 2];
                     break;
                 case CardType.Heart:
-                    card= HeartCardPrefabs[cardValue-2];
+                    card = HeartCardPrefabs[cardValue - 2];
                     break;
             }
             return card;
@@ -79,8 +79,8 @@ namespace PK.PokerGame
     {
         public CardType type;
         public int cardValue;
-        public HandChildHandler hand;
-        public Transform chooseCardTransform;
+        public HandChildHandler hand = null;
+        public Transform chooseCardTransform = null;
         public System.Action<Card> addCardToHand;
     }
 }
