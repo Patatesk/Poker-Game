@@ -17,8 +17,8 @@ namespace PK.PokerGame
         private Mediator mediator;
 
 
-        private int handRank;
-        private int ranksBiggestNumber;
+        public int handRank;
+        public int ranksBiggestNumber;
 
         private void Awake()
         {
