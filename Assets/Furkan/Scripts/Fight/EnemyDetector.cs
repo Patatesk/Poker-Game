@@ -32,7 +32,7 @@ namespace PK.PokerGame
                 {
                     other.transform.root.tag = TagContainer.DontDisturbTag;
                     transform.root.tag = TagContainer.DontDisturbTag;
-                    Debug.Log("AI AI savaþý");
+                    
                     enemyDetected = true;
                 }
                 else if (other.CompareTag(TagContainer.PlayerTag))

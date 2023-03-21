@@ -41,7 +41,7 @@ namespace PK.PokerGame
         public void DeadAnim()
         {
             if (animator == null) return;
-            animator.SetBool(deadParameter, true);
+            animator.SetTrigger(deadParameter);
             animator.SetBool(idleParameter, false);
             animator.SetBool(moveParameter, false);
         }

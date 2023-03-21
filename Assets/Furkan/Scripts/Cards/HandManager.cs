@@ -1,7 +1,9 @@
+using DG.Tweening;
 using PK.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace PK.PokerGame
 {
@@ -54,6 +56,7 @@ namespace PK.PokerGame
             AddCardToHandRankHand(card);
             PublishCard(card);
             totalCardCount++;
+            ScaleUp();
         }
         private void AddCardToHandRankHand(Card card)
         {
@@ -91,6 +94,11 @@ namespace PK.PokerGame
                 request.chooseCardTransform = null;
                 mediator.Publish(request);
             }
+        }
+        private void ScaleUp()
+        {
+            Vector3 newScale = new Vector3(1 + (0.15f * totalCardCount), 1 + (0.15f * totalCardCount), 1 + (0.15f * totalCardCount));
+            transform.GetChild(0).DOScale(newScale, .5f);
         }
 
     }

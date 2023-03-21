@@ -9,15 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2082127854742047840}
+  - component: {fileID: 837230709196802970}
   - component: {fileID: 2082127854742047841}
   - component: {fileID: 2082127854742047846}
   - component: {fileID: 2082127854742047847}
   - component: {fileID: 2025206950}
   - component: {fileID: 2025206951}
   - component: {fileID: 2025206952}
+  - component: {fileID: 2025206953}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &837230709196802970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082127854742047843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8d9d7bd310cbf4a818f6f710ccc7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &2082127854742047841
 CharacterController:
   m_ObjectHideFlags: 0
@@ -70,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  canMove: 1
 --- !u!114 &2082127854742047847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +101,7 @@ MonoBehaviour:
   moveParameter: Run
   idleParameter: Idle
   deadParameter: Dying
-  locomotionParameter: 
+  locomotionParameter: locomotion
   animOfsset: 0
 --- !u!136 &2025206950
 CapsuleCollider:
@@ -96,7 +111,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082127854742047843}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.62
   m_Height: 1.71
@@ -115,8 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalCardCount: 0
-  isPlayer: 0
+  isPlayer: 1
   UIHand: {fileID: 0}
+  handRank: 0
+  ranksBiggestNumber: 0
 --- !u!114 &2025206952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +147,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handManager: {fileID: 2025206951}
+--- !u!54 &2025206953
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082127854742047843}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2082127855965098202
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082127855965098202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.245, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -220,8 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6c5004d9f591247b2748c675255566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTag1: Player
-  enemyTag2: AI
+  Label: 
+  isPlayer: 1
+  enemyDetected: 0
 --- !u!1001 &2082127855841933528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252,7 +286,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.025
+      value: 0.006000042
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
