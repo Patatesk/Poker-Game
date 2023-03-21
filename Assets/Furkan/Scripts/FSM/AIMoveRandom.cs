@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace PK.PokerGame
 {
-    public class AIMoveRandom : AIAction
+    public class AIMoveRandom : MoreMountains.Tools.AIAction
     {
         [SerializeField] private Collider boundRange;
         [SerializeField] private AIMove move;

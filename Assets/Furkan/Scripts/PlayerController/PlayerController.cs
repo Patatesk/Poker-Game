@@ -14,11 +14,13 @@ namespace PK.PokerGame
         private CharacterController characterController;
         private float gravityValue = -9.81f;
 
+        public bool canMove = true;
+
         private void Awake()
         {
             input = new JoystickController();
             characterController = GetComponent<CharacterController>();
-            anim= GetComponent<AnimationController>();
+            anim = GetComponent<AnimationController>();
         }
         private void OnEnable()
         {
@@ -31,6 +33,7 @@ namespace PK.PokerGame
 
         void Update()
         {
+            if (!canMove) return;
             if (characterController.isGrounded && playerVelocity.y < 0)
             {
                 playerVelocity.y = 0f;
@@ -45,7 +48,7 @@ namespace PK.PokerGame
             }
 
             // Changes the height position of the player..
-            
+
 
             playerVelocity.y += gravityValue * Time.deltaTime;
             characterController.Move(playerVelocity * Time.deltaTime);
@@ -58,6 +61,6 @@ namespace PK.PokerGame
                 anim.IdleAnim();
             }
         }
-    
+
     }
 }

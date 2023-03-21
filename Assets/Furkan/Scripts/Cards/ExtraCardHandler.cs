@@ -12,6 +12,7 @@ namespace PK.PokerGame
         private Mediator mediator;
         private Action<Card> addCardToTheHand;
         [SerializeField] private GameObject textHelper;
+        [SerializeField] private GameObject discardButton;
 
         private Card CurrentCard;
         private void Awake()
@@ -46,19 +47,25 @@ namespace PK.PokerGame
             mediator.Publish(request);
             ChooseModeSignal.Trigger(true);
             textHelper.SetActive(true);
+            discardButton.SetActive(true);
         }
         private void OnTransformChildrenChanged()
         {
             if(transform.childCount > 0)
             {
                 CurrentCard = transform.GetChild(0).GetComponent<Card>();
+                Invoke("PreventCurrentCardChoosing", 0.5f);
             }
+        }
+        private void PreventCurrentCardChoosing()
+        {
+            CurrentCard.canChoose = false;
         }
         private void AddOrDiscardExtraCard(AddExtraCardToHandOrDiscard _addExtraCardToHandOrDiscard)
         {
             if(_addExtraCardToHandOrDiscard.whatHappens == WhatHappensExtraCard.Discard)
             {
-                CurrentCard.Discard();
+                CurrentCard.discardFeedback.PlayFeedbacks();
                 addCardToTheHand = null;
                 CurrentCard = null;
             }
@@ -73,6 +80,7 @@ namespace PK.PokerGame
             }
             ChooseModeSignal.Trigger(false);
             textHelper.SetActive(false);
+            discardButton.SetActive(false);
 
         }
     }

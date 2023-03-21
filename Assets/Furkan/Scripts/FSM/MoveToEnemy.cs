@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace PK.PokerGame
 {
-    public class MoveToEnemy : AIAction
+    public class MoveToEnemy : MoreMountains.Tools.AIAction
     {
         [SerializeField] private AIMove move;
         

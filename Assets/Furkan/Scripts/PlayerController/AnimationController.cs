@@ -34,7 +34,6 @@ namespace PK.PokerGame
         }
         public void IdleAnim()
         {
-            return;
             if (animator == null) return;
             animator.SetBool(idleParameter, true);
             animator.SetBool(moveParameter, false);

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Card
+  - AIHand
+  - AI
+  - DontDistrupt
   layers:
   - Default
   - TransparentFX

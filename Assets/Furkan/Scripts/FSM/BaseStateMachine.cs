@@ -7,7 +7,7 @@ namespace PK.PokerGame
 {
     public abstract class BaseStateMachine : MonoBehaviour
     {
-        protected BaseState currentState;
+        protected AIAction currentState;
 
 
         public virtual void Update()
@@ -15,7 +15,7 @@ namespace PK.PokerGame
             currentState?.Execute();
         }
 
-        public virtual void ChangeState(BaseState newState)
+        public virtual void ChangeState(AIAction newState)
         {
             currentState.Exit();
             currentState = newState;
@@ -28,7 +28,7 @@ namespace PK.PokerGame
     [System.Serializable]
     public class StatesAndDecions
     {
-        public BaseState StateToPerform;
+        public AIAction StateToPerform;
         
 
     }

@@ -39,11 +39,16 @@ namespace PK.PokerGame
             yield return new WaitForSeconds(.5f);
             GetRandomTwoCard();
         }
+        public void BuildAIHand()
+        {
+            BuildAIHandSignal.Trigger(hand);
+        }
         public void AddCardToHand(Card card)
         {
             if (totalCardCount == 5)
             {
-                ExtraCardCollectedSginal.Trigger(card,AddCardToHandRankHand);
+                if (isPlayer)
+                    ExtraCardCollectedSginal.Trigger(card, AddCardToHandRankHand);
                 return;
             }
             AddCardToHandRankHand(card);

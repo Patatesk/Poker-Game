@@ -13,8 +13,9 @@ namespace PK.PokerGame
         private NavMeshAgent agent;
         private AnimationController animController;
         private Vector2 Velocity;
-
         private Vector2 SmoothDeltaPosition;
+        private bool canMove = true;
+
 
         private void Awake()
         {
@@ -32,8 +33,15 @@ namespace PK.PokerGame
             agent.nextPosition = rootPosition;
         }
 
+        public void ToggleCanMove(bool move)
+        {
+            canMove= move;
+            agent.enabled= move;
+        }
+
         private void Update()
         {
+            if (!canMove) return;
             SynchronizeAnimatorAndAgent();
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PK.PokerGame
 {
-    public abstract class BaseState : MonoBehaviour
+    public abstract class AIAction : MonoBehaviour
     {
         public BaseStateMachine machine;
 

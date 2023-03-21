@@ -1,12 +1,11 @@
-using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using MoreMountains.Tools;
 
 namespace PK.PokerGame
 {
-    public class MoveToCardAction : MoreMountains.Tools.AIAction
+    public class IDle : MoreMountains.Tools.AIAction
     {
         private AIMove move;
         private AIStateMachine stateMachine;
@@ -25,25 +24,15 @@ namespace PK.PokerGame
         {
             base.OnEnterState();
             stateMachine.navMeshAgent.ResetPath();
+            move.ToggleCanMove(false);
+            GetComponent<AnimationController>().IdleAnim();
+
         }
         public override void PerformAction()
         {
-            if (_brain.Target != null && !stateMachine.navMeshAgent.hasPath)
-            {
-                move.ChangeTargetandMove(_brain.Target);
-            }
-            
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.CompareTag("Card"))
-            {
-                _brain.Target= null;
-                stateMachine.navMeshAgent.ResetPath();
-                stateMachine.handManager.AddCardToHand(other.GetComponent<Card>());
-            }
-        }
+           
 
-
+        }
+       
     }
 }

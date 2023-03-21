@@ -16,7 +16,7 @@ namespace PK.PokerGame
         private Mediator mediator;
         private bool useForUI;
         public MMF_Player discardFeedback;
-        private bool canChoose;
+        public bool canChoose;
         public bool forUI
         {
             get
