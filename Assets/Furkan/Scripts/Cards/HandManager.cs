@@ -17,7 +17,8 @@ namespace PK.PokerGame
         private List<Card> hand = new List<Card>();
         private HandRanker handRanker;
         private Mediator mediator;
-
+        private Player player;
+        private AI AI;
 
         public int handRank;
         public int ranksBiggestNumber;
@@ -26,6 +27,8 @@ namespace PK.PokerGame
         {
             handRanker = new HandRanker();
             mediator = GameObject.FindObjectOfType<Mediator>();
+            player = GetComponent<Player>();
+            AI = GetComponent<AI>();
         }
         private void OnEnable()
         {
@@ -56,7 +59,12 @@ namespace PK.PokerGame
             AddCardToHandRankHand(card);
             PublishCard(card);
             totalCardCount++;
-            ScaleUp();
+            if(isPlayer)
+            player.ScaleUp(totalCardCount);
+            else
+            {
+                AI.ScaleUp(totalCardCount);
+            }
         }
         private void AddCardToHandRankHand(Card card)
         {
@@ -95,11 +103,7 @@ namespace PK.PokerGame
                 mediator.Publish(request);
             }
         }
-        private void ScaleUp()
-        {
-            Vector3 newScale = new Vector3(1 + (0.15f * totalCardCount), 1 + (0.15f * totalCardCount), 1 + (0.15f * totalCardCount));
-            transform.GetChild(0).DOScale(newScale, .5f);
-        }
+       
 
     }
 

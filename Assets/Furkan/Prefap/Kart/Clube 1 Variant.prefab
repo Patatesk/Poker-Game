@@ -78,6 +78,21 @@ PrefabInstance:
       propertyPath: cardValue
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 1907506262331548295, guid: f3e5833e85548634fb58e5e1fd1de312,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907506262331548295, guid: f3e5833e85548634fb58e5e1fd1de312,
+        type: 3}
+      propertyPath: forwardFaceAnim
+      value: 
+      objectReference: {fileID: 2512144543318198599}
+    - target: {fileID: 1959293786829021785, guid: f3e5833e85548634fb58e5e1fd1de312,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2518627356130543654, guid: f3e5833e85548634fb58e5e1fd1de312,
         type: 3}
       propertyPath: m_Sprite
@@ -87,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 5648926151731517918, guid: f3e5833e85548634fb58e5e1fd1de312,
         type: 3}
       propertyPath: m_Name
-      value: Clube 1
+      value: Clube 1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8361935389835255070, guid: f3e5833e85548634fb58e5e1fd1de312,
         type: 3}
@@ -96,3 +111,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3e5833e85548634fb58e5e1fd1de312, type: 3}
+--- !u!114 &2512144543318198599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7965732704037887956, guid: f3e5833e85548634fb58e5e1fd1de312,
+    type: 3}
+  m_PrefabInstance: {fileID: 5500893603486570131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

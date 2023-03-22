@@ -29,12 +29,11 @@ namespace PK.PokerGame
         private void BuildHand(List<Card> hand)
         {
             HandChildHandler handObj = Instantiate(handPrefab,parent).GetComponent<HandChildHandler>();
-            
-
+            handObj.transform.GetComponent<RectTransform>().anchoredPosition= Vector3.zero;
             foreach (Card card in hand)
             {
                 RequestCardFoAI(card,handObj);
-            }
+            }     
 
         }
 
@@ -44,6 +43,7 @@ namespace PK.PokerGame
             request.cardValue = card.cardValue;
             request.type = card.cardType;
             request.hand = hand;
+            request.isActive = false;
             mediator.Publish(request);
         }
         

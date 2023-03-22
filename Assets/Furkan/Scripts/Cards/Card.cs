@@ -16,6 +16,7 @@ namespace PK.PokerGame
         private Mediator mediator;
         private bool useForUI;
         public MMF_Player discardFeedback;
+        [SerializeField] private MMF_Player forwardFaceAnim;
         public bool canChoose;
         public bool forUI
         {
@@ -44,6 +45,17 @@ namespace PK.PokerGame
         private void OnDisable()
         {
             ChooseModeSignal.ChooseMode -= ChangeChooseMode;
+        }
+
+        public void FlipBackFace()
+        {
+            Transform child= transform.GetChild(1);
+            child.GetChild(0).gameObject.SetActive(true);
+            child.GetChild(1).gameObject.SetActive(false);
+        }
+        public void FlipForwardFace()
+        {
+            forwardFaceAnim.PlayFeedbacks();
         }
         private void ChangeChooseMode(bool mode)
         {

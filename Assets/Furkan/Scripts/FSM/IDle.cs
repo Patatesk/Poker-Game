@@ -23,9 +23,9 @@ namespace PK.PokerGame
         public override void OnEnterState()
         {
             base.OnEnterState();
-            stateMachine.navMeshAgent.ResetPath();
-            move.ToggleCanMove(false);
-            GetComponent<AnimationController>().IdleAnim();
+            //stateMachine.navMeshAgent.ResetPath();
+            //move.ToggleCanMove(false);
+            //GetComponent<AnimationController>().IdleAnim();
 
         }
         public override void PerformAction()

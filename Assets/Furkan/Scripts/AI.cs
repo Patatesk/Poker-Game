@@ -5,51 +5,44 @@ using UnityEngine;
 
 namespace PK.PokerGame
 {
-    public class Player : MonoBehaviour
+    public class AI : MonoBehaviour
     {
-        [SerializeField] private float scaleUpAmount = 0.15f;
-
+        [SerializeField] private float scaleUpAmount;
         private HandManager handManager;
         private AnimationController animationController;
-        private PlayerController playerController;
+        private AIStateMachine stateMachine;
         private EnemyDetector enemyDetector;
+        private AIMove aIMove;
+        private AIHandBuilder ýHandBuilder;
 
         private void Awake()
         {
             handManager = GetComponentInChildren<HandManager>();
-            animationController = GetComponentInChildren<AnimationController>();
-            playerController= GetComponentInChildren<PlayerController>();
+            animationController= GetComponentInChildren<AnimationController>();
+            stateMachine= GetComponentInChildren<AIStateMachine>();
             enemyDetector= GetComponentInChildren<EnemyDetector>();
+            aIMove= GetComponentInChildren<AIMove>();
+            ýHandBuilder= GetComponentInChildren<AIHandBuilder>();
         }
 
-        private void Update()
-        {
-            if (enemyDetector.Decide())
-            {
-                playerController.canMove= false;
-                animationController.IdleAnim();
-            }
-        }
-        
         public void FightEnded()
         {
-            playerController.canMove= true;
-            gameObject.tag = TagContainer.PlayerTag;
+            aIMove.ToggleCanMove(true);
+            stateMachine.TransitionToState("Random");
+            gameObject.tag = TagContainer.AITag;
         }
         public void Lose()
         {
             animationController.DeadAnim();
-            Debug.Log("LoseScreen");
+            Debug.Log("BirSüreSonraYokOlacak");
+        }
+        public void FightStarted()
+        {
+            handManager.BuildAIHand();
         }
         public void Win(float time)
         {
             Invoke("FightEnded", time);
-
-        }
-        public void FightSarted()
-        {
-    
-
         }
         public int HandRank()
         {
@@ -59,7 +52,7 @@ namespace PK.PokerGame
         {
             return handManager.ranksBiggestNumber;
         }
-        
+
         public int TotalCardCount()
         {
             return handManager.totalCardCount;
@@ -69,14 +62,13 @@ namespace PK.PokerGame
             Vector3 newScale = new Vector3(1 + (scaleUpAmount * totalCardCoun), 1 + (scaleUpAmount * totalCardCoun), 1 + (scaleUpAmount * totalCardCoun));
             transform.GetChild(0).DOScale(newScale, .5f);
         }
-        
+
         public void ForceToFight()
         {
-            enemyDetector.enemyDetected= true;
+            stateMachine.TransitionToState("Idle");
+            enemyDetector.enemyDetected = true;
             animationController.IdleAnim();
-            playerController.canMove = false;
+            aIMove.ToggleCanMove(false);
         }
-
-
     }
 }

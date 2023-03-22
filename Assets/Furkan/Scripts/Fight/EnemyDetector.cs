@@ -9,6 +9,7 @@ namespace PK.PokerGame
     {
         [SerializeField] private bool isPlayer;
         public bool enemyDetected;
+
         public override bool Decide()
         {
             return enemyDetected;
@@ -20,9 +21,11 @@ namespace PK.PokerGame
             {
                 if (other.CompareTag(TagContainer.AITag))
                 {
+                    AI ai = other.transform.root.GetComponent<AI>();
+                    ai.ForceToFight();
                     other.transform.root.tag = TagContainer.DontDisturbTag;
                     tag =  TagContainer.DontDisturbTag;
-                    StartFightSignal.Trigger(transform.root.gameObject, other.transform.root.gameObject);
+                    StartFightSignal.Trigger(transform.root.GetComponent<Player>(), ai);
                     enemyDetected = true;
                 }
             }
@@ -37,10 +40,12 @@ namespace PK.PokerGame
                 }
                 else if (other.CompareTag(TagContainer.PlayerTag))
                 {
+                    Player player = other.GetComponent<Player>();
+                    player.ForceToFight();
                     enemyDetected = true;
                     other.tag = TagContainer.DontDisturbTag;
                     transform.root.tag = TagContainer.DontDisturbTag;
-                    StartFightSignal.Trigger(other.gameObject, transform.root.gameObject);
+                    StartFightSignal.Trigger(player, transform.root.GetComponent<AI>());
                 }
             }
 

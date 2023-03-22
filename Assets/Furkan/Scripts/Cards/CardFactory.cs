@@ -38,12 +38,12 @@ namespace PK.PokerGame
             {
                 card.transform.SetParent(request.hand.transform.GetChild(0));
                 card.transform.SetSiblingIndex(request.hand.ReturnEmptySpace());
-                card.SetActive(true);
+                card.SetActive(request.isActive);
             }
             else if (request.chooseCardTransform != null)
             {
                 card.transform.SetParent(request.chooseCardTransform);
-                card.SetActive(true);
+                card.SetActive(request.isActive);
             }
             else if (request.hand == null && request.chooseCardTransform == null)
             {
@@ -82,5 +82,6 @@ namespace PK.PokerGame
         public HandChildHandler hand = null;
         public Transform chooseCardTransform = null;
         public System.Action<Card> addCardToHand;
+        public bool isActive = true;
     }
 }
