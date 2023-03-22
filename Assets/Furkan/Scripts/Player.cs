@@ -77,6 +77,10 @@ namespace PK.PokerGame
             playerController.canMove = false;
         }
 
+        public void AddCard(Card card)
+        {
+            handManager.AddCardToHandRankHand(card);
+        }
 
     }
 }

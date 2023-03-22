@@ -16,7 +16,7 @@ namespace PK.PokerGame
         [SerializeField] private GameObject youWin, youLose,vs;
         private float aýStartPos;
         private float playerStartPos;
-
+        public bool changeCard;
         private bool isFighting;
         
         private void Awake()
@@ -60,8 +60,21 @@ namespace PK.PokerGame
 
                 yield return new WaitForSeconds(3f);
                 vs.SetActive(false);
-                FindWinner(player, fighterAI);
+                string winner = FindWinner(player, fighterAI);
+                if(winner == "Player")
+                {
+                    yield return new WaitUntil( () => changeCard == true);
+                    player.Win(2);
+                    fighterAI.Lose();
+                    CanSelectableSignal.Trigger(true);
+                }
+                else
+                {
+                    player.Lose();
+                    fighterAI.Win(2);
+                }
 
+                yield return new WaitForSeconds(2f);
                 AýHand.DOAnchorPosY(aýStartPos, 1f);
                 AýHand.DOScale(1f, 1);
                 playerHand.DOScale(1f, 1);
@@ -73,6 +86,11 @@ namespace PK.PokerGame
             }
         }
 
+        public void CardsChanged()
+        {
+            changeCard = true;
+        }
+        
         private static void Turn(Player player, AI fighterAI)
         {
             Vector3 playerLookAtPos = fighterAI.transform.position - player.transform.position;
@@ -88,33 +106,33 @@ namespace PK.PokerGame
             fighterAI.transform.DOLookAt(player.transform.position, .5f, AxisConstraint.X);
         }
 
-        private void FindWinner(Player player, AI fighterAI)
+        private string FindWinner(Player player, AI fighterAI)
         {
             if (player.HandRank() > fighterAI.HandRank())
             {
                 youWin.SetActive(true);
-                fighterAI.Lose();
-                player.Win(2);
+               
+                return "Player";
             }
             else if (player.HandRank() < fighterAI.HandRank())
             {
                 youLose.SetActive(true);
-                player.Lose();
-                fighterAI.Win(2);
+                
+                return "AI";
             }
             else
             {
                 if (player.BiggestNumber() > fighterAI.BiggestNumber())
                 {
-                    fighterAI.Lose();
-                    player.Win(2);
+                    
                     youWin.SetActive(true);
+                    return "Player";
                 }
                 else
                 {
                     youLose.SetActive(true);
-                    player.Lose();
-                    fighterAI.Win(2);
+                    
+                    return "AI";
                 }
             }
         }
@@ -124,6 +142,7 @@ namespace PK.PokerGame
             isFighting= false;
             _camera.Priority = 0;
             fightUI.SetActive(false);
+            changeCard = false;
             Destroy(AýHand.GetChild(0).gameObject);
         }
     }

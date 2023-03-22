@@ -38,6 +38,7 @@ namespace PK.PokerGame
         {
             DiscardCardSignal.Discard -= Discard;
         }
+      
 
         private  IEnumerator Start()
         {
@@ -66,7 +67,7 @@ namespace PK.PokerGame
                 AI.ScaleUp(totalCardCount);
             }
         }
-        private void AddCardToHandRankHand(Card card)
+        public void AddCardToHandRankHand(Card card)
         {
             hand.Add(card);
             var ranking = handRanker.GetHandRank(hand);
