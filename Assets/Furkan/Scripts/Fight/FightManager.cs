@@ -16,15 +16,17 @@ namespace PK.PokerGame
         [SerializeField] private GameObject youWin, youLose,vs;
         [SerializeField] private GameObject extraCardParts;
         [SerializeField] private GameObject discardButton;
+        private float discardTime = 2f;
         private float aýStartPos;
         private float playerStartPos;
         public bool changeCard;
         private bool isFighting;
-        
+        private float _discardTime;
         private void Awake()
         {
             aýStartPos = AýHand.anchoredPosition.y;
             playerStartPos = playerHand.anchoredPosition.y;
+            _discardTime= discardTime;
         }
         private void OnEnable()
         {
@@ -39,10 +41,15 @@ namespace PK.PokerGame
             if (isFighting) return;
             StartCoroutine(StartFightSequence(player, fighterAI));
         }
+        public void ChangeDiscardTime(float time)
+        {
+            _discardTime = time;
+        }
         private IEnumerator StartFightSequence(Player player,AI fighterAI)
         {
             if (!isFighting)
             {
+               
                 extraCardParts.SetActive(false);
                 isFighting = true;
                 player.FightSarted();
@@ -78,7 +85,7 @@ namespace PK.PokerGame
                     fighterAI.Win(2);
                 }
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(_discardTime);
                 AýHand.DOAnchorPosY(aýStartPos, 1f);
                 AýHand.DOScale(1f, 1);
                 playerHand.DOScale(1f, 1);

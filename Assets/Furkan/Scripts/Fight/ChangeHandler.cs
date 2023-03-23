@@ -28,7 +28,7 @@ namespace PK.PokerGame
         }
 
 
-
+       
 
         private void OnEnable()
         {
@@ -59,6 +59,7 @@ namespace PK.PokerGame
         public void Discard()
         {
             fightManager.CardsChanged();
+            fightManager.ChangeDiscardTime(.2f);
         }
         private void AddCard(ChangeCardDelivery delivery)
         {

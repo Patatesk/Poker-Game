@@ -41,7 +41,7 @@ namespace PK.PokerGame
                 if (_chil.TryGetComponent<Card>(out Card _Card))
                 {
                     _Card.FlipForwardFace();
-                    yield return new WaitForSeconds(.5f);
+                    yield return new WaitForSeconds(.2f);
                 }
             }
         }

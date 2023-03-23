@@ -195,7 +195,7 @@ MonoBehaviour:
         AnimateRotationTarget: {fileID: 1029030651541842357}
         Mode: 2
         RotationSpace: 0
-        AnimateRotationDuration: 0.5
+        AnimateRotationDuration: 0.3
         RemapCurveZero: 0
         RemapCurveOne: 360
         AnimateX: 1
@@ -383,7 +383,7 @@ MonoBehaviour:
           TimescaleMode: 0
           ExcludeFromHoldingPauses: 0
           ContributeToTotalDuration: 1
-          InitialDelay: 0.5
+          InitialDelay: 0.3
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
           TimescaleMode: 0
           ExcludeFromHoldingPauses: 0
           ContributeToTotalDuration: 1
-          InitialDelay: 0.5
+          InitialDelay: 0.3
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
           TimescaleMode: 0
           ExcludeFromHoldingPauses: 0
           ContributeToTotalDuration: 1
-          InitialDelay: 0.5
+          InitialDelay: 0.3
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
         AnimateRotationTarget: {fileID: 1029030651541842357}
         Mode: 2
         RotationSpace: 0
-        AnimateRotationDuration: 0.5
+        AnimateRotationDuration: 0.3
         RemapCurveZero: 0
         RemapCurveOne: 360
         AnimateX: 1
