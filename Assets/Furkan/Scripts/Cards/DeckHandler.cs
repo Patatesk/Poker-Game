@@ -8,7 +8,7 @@ namespace PK.PokerGame
     {
         [SerializeField] public bool isOwnedBuyPlayer;
         private Transform child;
-
+        
         private void Awake()
         {
             child = transform.GetChild(0);

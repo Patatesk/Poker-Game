@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 8289823765045025949, guid: bcd25ee002dc44143a1ff8619e9c243a,
         type: 3}
       propertyPath: m_Name
-      value: Heart 10
+      value: Heart 10 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcd25ee002dc44143a1ff8619e9c243a, type: 3}

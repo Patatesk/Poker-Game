@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8d9d7bd310cbf4a818f6f710ccc7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleUpAmount: 0.15
 --- !u!143 &2082127854742047841
 CharacterController:
   m_ObjectHideFlags: 0

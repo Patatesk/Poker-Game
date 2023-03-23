@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 2456836678302375622, guid: 7a9d415b7a423e546b3e1db9518fa52b,
         type: 3}
       propertyPath: m_Name
-      value: Spade 1
+      value: Spade 1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5660635137381764926, guid: 7a9d415b7a423e546b3e1db9518fa52b,
         type: 3}
@@ -23,6 +23,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: df86a21a276585c47bb9108c3c0a54ae,
         type: 3}
+    - target: {fileID: 5910678246925142600, guid: 7a9d415b7a423e546b3e1db9518fa52b,
+        type: 3}
+      propertyPath: _animateRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7323210029960929802, guid: 7a9d415b7a423e546b3e1db9518fa52b,
         type: 3}
       propertyPath: m_RootOrder
@@ -76,6 +81,11 @@ PrefabInstance:
     - target: {fileID: 7323210029960929802, guid: 7a9d415b7a423e546b3e1db9518fa52b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8504407156426597791, guid: 7a9d415b7a423e546b3e1db9518fa52b,
+        type: 3}
+      propertyPath: WinPirze
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504407156426597791, guid: 7a9d415b7a423e546b3e1db9518fa52b,

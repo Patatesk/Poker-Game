@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1097367667870706124, guid: c7268407a2d0d624cb47aadf6516e7d4,
         type: 3}
       propertyPath: m_Name
-      value: Heart 2
+      value: Heart 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3842742135045778700, guid: c7268407a2d0d624cb47aadf6516e7d4,
         type: 3}
@@ -80,6 +80,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 6568346835275698837, guid: c7268407a2d0d624cb47aadf6516e7d4,
         type: 3}
+      propertyPath: WinPirze
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568346835275698837, guid: c7268407a2d0d624cb47aadf6516e7d4,
+        type: 3}
       propertyPath: cardValue
       value: 2
       objectReference: {fileID: 0}
@@ -89,5 +94,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 806eb1cd56d54ba4ea2ea38007f26b9a,
         type: 3}
+    - target: {fileID: 9161517266203426114, guid: c7268407a2d0d624cb47aadf6516e7d4,
+        type: 3}
+      propertyPath: _animateRotation
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7268407a2d0d624cb47aadf6516e7d4, type: 3}

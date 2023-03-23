@@ -8,6 +8,8 @@ namespace PK.PokerGame
 {
     public class ChangeHandler : MonoBehaviour
     {
+        [SerializeField] private GameObject buttons;
+
         private Card toDiscard;
         private Card toAdd;
         private Mediator mediator;
@@ -15,12 +17,14 @@ namespace PK.PokerGame
         private FightManager fightManager;
 
         private Transform parent;
-        private int siblinIndex;
+        private int siblinIndex = 10;
+        private HandChildHandler playerHandChildHandler;
         private void Awake()
         {
-             mediator = GameObject.FindAnyObjectByType<Mediator>();
+            mediator = GameObject.FindAnyObjectByType<Mediator>();
             player = GameObject.FindObjectOfType<Player>();
             fightManager = GameObject.FindObjectOfType<FightManager>();
+            playerHandChildHandler = GameObject.FindObjectOfType<HandChildHandler>();
         }
 
 
@@ -38,31 +42,58 @@ namespace PK.PokerGame
         [ContextMenu("Deneme")]
         public void CahngeCards()
         {
+            if (toAdd == null) return;
             CanSelectableSignal.Trigger(false);
-            toDiscard.discardFeedback.PlayFeedbacks();
+            if(toDiscard != null)  toDiscard.discardFeedback.PlayFeedbacks();
+            if (parent == null) parent= playerHandChildHandler.transform.GetChild(0);
             toAdd.transform.SetParent(parent);
+            if (siblinIndex == 10) siblinIndex = playerHandChildHandler.ReturnEmptySpace();
             toAdd.transform.SetSiblingIndex(siblinIndex);
             player.AddCard(toAdd);
             fightManager.CardsChanged();
+            toAdd.UnSelect();
+            buttons.SetActive(false);
 
         }
 
+        public void Discard()
+        {
+            fightManager.CardsChanged();
+        }
         private void AddCard(ChangeCardDelivery delivery)
         {
+            buttons.SetActive(true);
             if (delivery.isOwnedByPlayer)
             {
+                if (player.TotalCardCount() < 5)
+                {
+                    
+                    return;
+                }
+                if (toDiscard != null)
+                {
+                    toDiscard.UnSelect();
+                    toDiscard = null;
+                }
                 toDiscard = delivery.card;
                 parent = delivery.parent;
                 siblinIndex = delivery.siblingIndex;
+                toDiscard.Select(100);
             }
             else
             {
+                if (toAdd != null)
+                {
+                    toAdd.UnSelect();
+                    toAdd = null;
+                }
                 toAdd = delivery.card;
+                toAdd.Select(-100);
             }
         }
     }
 
-    public class ChangeCardDelivery:ICommand
+    public class ChangeCardDelivery : ICommand
     {
         public bool isOwnedByPlayer;
         public Card card;

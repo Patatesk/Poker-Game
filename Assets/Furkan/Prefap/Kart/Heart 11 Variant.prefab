@@ -82,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 6780401372164835120, guid: eff90eda089698c4ba81929011dd8ae8,
         type: 3}
       propertyPath: m_Name
-      value: Heart 11
+      value: Heart 11 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7239070858416620528, guid: eff90eda089698c4ba81929011dd8ae8,
         type: 3}

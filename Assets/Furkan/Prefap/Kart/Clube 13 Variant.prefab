@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 7443142371070598510, guid: 26d61c8324368aa4b92f9e3597abd977,
         type: 3}
       propertyPath: m_Name
-      value: Clube 13
+      value: Clube 13 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d61c8324368aa4b92f9e3597abd977, type: 3}

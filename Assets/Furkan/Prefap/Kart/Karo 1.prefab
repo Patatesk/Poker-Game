@@ -2159,6 +2159,7 @@ MonoBehaviour:
   discardFeedback: {fileID: 5979309458041054632}
   forwardFaceAnim: {fileID: 5951229800933542578}
   canChoose: 0
+  WinPirze: 0
 --- !u!114 &4681962630238251548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,7 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationSpeed: 5
   _animatePosition: 1
-  _animateRotation: 1
+  _animateRotation: 0
   _animateScale: 0
 --- !u!1 &8509245933887426671
 GameObject:

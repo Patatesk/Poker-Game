@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 8046473663425764447, guid: 7298a31b64f35e441beb43b6db12b622,
         type: 3}
       propertyPath: m_Name
-      value: Karo 11
+      value: Karo 11 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7298a31b64f35e441beb43b6db12b622, type: 3}

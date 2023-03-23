@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 407813501727819503, guid: f91f6c2ed1269704dab432079836b715,
         type: 3}
       propertyPath: m_Name
-      value: Karo 6
+      value: Karo 6 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4595452488456503855, guid: f91f6c2ed1269704dab432079836b715,
         type: 3}

@@ -33,6 +33,7 @@ namespace PK.PokerGame
         
         public void FightEnded()
         {
+            enemyDetector.enemyDetected= false;
             playerController.canMove= true;
             gameObject.tag = TagContainer.PlayerTag;
         }

@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 158221860039167821, guid: 95f08faa193541146948fd7ed2fb8e8e,
         type: 3}
       propertyPath: m_Name
-      value: Clube 2
+      value: Clube 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4061286412009130893, guid: 95f08faa193541146948fd7ed2fb8e8e,
         type: 3}
@@ -74,6 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210405889222112276, guid: 95f08faa193541146948fd7ed2fb8e8e,
         type: 3}
+      propertyPath: WinPirze
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210405889222112276, guid: 95f08faa193541146948fd7ed2fb8e8e,
+        type: 3}
       propertyPath: cardValue
       value: 2
       objectReference: {fileID: 0}
@@ -89,5 +94,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2ef3d23ffe66f0141955b186a8558e97,
         type: 3}
+    - target: {fileID: 8227091958142671811, guid: 95f08faa193541146948fd7ed2fb8e8e,
+        type: 3}
+      propertyPath: _animateRotation
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f08faa193541146948fd7ed2fb8e8e, type: 3}

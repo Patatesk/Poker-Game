@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 8284388889498408556, guid: 5ee087bf33389864eb2091e4b614954e,
         type: 3}
       propertyPath: m_Name
-      value: Spade 12
+      value: Spade 12 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ee087bf33389864eb2091e4b614954e, type: 3}

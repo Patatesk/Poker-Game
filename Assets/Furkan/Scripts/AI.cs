@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,14 @@ namespace PK.PokerGame
     public class AI : MonoBehaviour
     {
         [SerializeField] private float scaleUpAmount;
+        [SerializeField] private MMF_Player dieFeedBack;
         private HandManager handManager;
         private AnimationController animationController;
         private AIStateMachine stateMachine;
         private EnemyDetector enemyDetector;
         private AIMove aIMove;
         private AIHandBuilder ýHandBuilder;
+        private Collider[] colliders;
 
         private void Awake()
         {
@@ -23,6 +26,7 @@ namespace PK.PokerGame
             enemyDetector= GetComponentInChildren<EnemyDetector>();
             aIMove= GetComponentInChildren<AIMove>();
             ýHandBuilder= GetComponentInChildren<AIHandBuilder>();
+            colliders = GetComponentsInChildren<Collider>();
         }
 
         public void FightEnded()
@@ -30,15 +34,24 @@ namespace PK.PokerGame
             aIMove.ToggleCanMove(true);
             stateMachine.TransitionToState("Random");
             gameObject.tag = TagContainer.AITag;
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = true;
+            }
         }
         public void Lose()
         {
             animationController.DeadAnim();
             Debug.Log("BirSüreSonraYokOlacak");
+            dieFeedBack.PlayFeedbacks();
         }
         public void FightStarted()
         {
             handManager.BuildAIHand();
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
         }
         public void Win(float time)
         {

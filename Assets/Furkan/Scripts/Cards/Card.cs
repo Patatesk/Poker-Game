@@ -20,7 +20,7 @@ namespace PK.PokerGame
         public MMF_Player discardFeedback;
         [SerializeField] private MMF_Player forwardFaceAnim;
         public bool canChoose;
-        public bool WinPirze ;
+        public bool WinPirze = false;
         private float startPos;
         private bool selected;
         private Transform frontFace;
@@ -77,12 +77,14 @@ namespace PK.PokerGame
         private void ChangeWinPrize(bool mode)
         {
             WinPirze = mode;
-            if (!mode)
-            {
-                frontFace.DOLocalMoveY(startPos, .5f);
-                selected = false;
-            }
         }
+
+        public void UnSelect()
+        {
+            frontFace.DOLocalMoveY(startPos, .5f);
+            selected = false;
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (canChoose)
@@ -97,11 +99,6 @@ namespace PK.PokerGame
             if (WinPirze && !selected)
             {
                 selected = true;
-                if (startPos == 0)
-                    startPos = frontFace.localPosition.y;
-                backFace.gameObject.SetActive(false);
-                frontFace.DOMoveY(frontFace.position.y + 100, .5f);
-                ResetCardSignal.Trigger(this);
                 ChangeCardDelivery delivery = new ChangeCardDelivery();
                 delivery.card = this;
                 delivery.siblingIndex = transform.GetSiblingIndex();
@@ -112,11 +109,20 @@ namespace PK.PokerGame
 
 
         }
+
+        public void Select(int value)
+        {
+            if (startPos == 0)
+                startPos = frontFace.localPosition.y;
+            backFace.gameObject.SetActive(false);
+            frontFace.DOMoveY(frontFace.position.y + value, .5f);
+        }
+
         private void ResetCard(Card card)
         {
             if (card == this) return;
             if (selected)
-                frontFace.DOMoveY(startPos, .5f);
+                frontFace.DOLocalMoveY(startPos, .5f);
             selected = false;
 
 

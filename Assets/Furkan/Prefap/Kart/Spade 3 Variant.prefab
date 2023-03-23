@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 386207336846285945, guid: f37c92ae1c5b68c498ec17bea2f5f558,
         type: 3}
       propertyPath: m_Name
-      value: Spade 3
+      value: Spade 3 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4553875956458428601, guid: f37c92ae1c5b68c498ec17bea2f5f558,
         type: 3}
@@ -74,6 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5855175635224930080, guid: f37c92ae1c5b68c498ec17bea2f5f558,
         type: 3}
+      propertyPath: WinPirze
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855175635224930080, guid: f37c92ae1c5b68c498ec17bea2f5f558,
+        type: 3}
       propertyPath: cardValue
       value: 3
       objectReference: {fileID: 0}
@@ -89,5 +94,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fc433ac646cd0be439f7f98c5913aafa,
         type: 3}
+    - target: {fileID: 8449466463904352503, guid: f37c92ae1c5b68c498ec17bea2f5f558,
+        type: 3}
+      propertyPath: _animateRotation
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f37c92ae1c5b68c498ec17bea2f5f558, type: 3}

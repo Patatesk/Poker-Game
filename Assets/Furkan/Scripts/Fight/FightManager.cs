@@ -14,6 +14,8 @@ namespace PK.PokerGame
         [SerializeField] private RectTransform AýHand;
         [SerializeField] private RectTransform playerHand;
         [SerializeField] private GameObject youWin, youLose,vs;
+        [SerializeField] private GameObject extraCardParts;
+        [SerializeField] private GameObject discardButton;
         private float aýStartPos;
         private float playerStartPos;
         public bool changeCard;
@@ -41,6 +43,7 @@ namespace PK.PokerGame
         {
             if (!isFighting)
             {
+                extraCardParts.SetActive(false);
                 isFighting = true;
                 player.FightSarted();
                 fighterAI.FightStarted();
@@ -63,10 +66,11 @@ namespace PK.PokerGame
                 string winner = FindWinner(player, fighterAI);
                 if(winner == "Player")
                 {
+                    discardButton.SetActive(true);
+                    CanSelectableSignal.Trigger(true);
                     yield return new WaitUntil( () => changeCard == true);
                     player.Win(2);
                     fighterAI.Lose();
-                    CanSelectableSignal.Trigger(true);
                 }
                 else
                 {
@@ -103,7 +107,6 @@ namespace PK.PokerGame
             AýLookAtRot.x = 0;
             AýLookAtRot.y = 0;
             fighterAI.transform.rotation = Quaternion.Slerp(fighterAI.transform.rotation, AýLookAtRot, 0.5f);
-            fighterAI.transform.DOLookAt(player.transform.position, .5f, AxisConstraint.X);
         }
 
         private string FindWinner(Player player, AI fighterAI)
@@ -144,6 +147,9 @@ namespace PK.PokerGame
             fightUI.SetActive(false);
             changeCard = false;
             Destroy(AýHand.GetChild(0).gameObject);
+            extraCardParts.SetActive(true);
+            discardButton.SetActive(false);
+
         }
     }
 

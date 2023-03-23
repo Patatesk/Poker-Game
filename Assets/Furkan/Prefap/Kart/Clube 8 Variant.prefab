@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 950827643961151547, guid: 328f31408deb35849a3c3ec503237004,
         type: 3}
       propertyPath: m_Name
-      value: Clube 8
+      value: Clube 8 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3989220860041352443, guid: 328f31408deb35849a3c3ec503237004,
         type: 3}
