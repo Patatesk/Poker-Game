@@ -8,7 +8,7 @@ namespace PK.PokerGame
 {
     public class AIMoveRandom : MoreMountains.Tools.AIAction
     {
-        [SerializeField] private Collider boundRange;
+        public Collider boundRange;
         [SerializeField] private AIMove move;
         private  AIStateMachine stateMachine;
         protected override void Awake()

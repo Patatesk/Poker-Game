@@ -10,6 +10,7 @@ namespace PK.PokerGame
     {
         [SerializeField] private float scaleUpAmount;
         [SerializeField] private MMF_Player dieFeedBack;
+        private Collider bound;
         private HandManager handManager;
         private AnimationController animationController;
         private AIStateMachine stateMachine;
@@ -17,6 +18,7 @@ namespace PK.PokerGame
         private AIMove aIMove;
         private AIHandBuilder ýHandBuilder;
         private Collider[] colliders;
+        private AIMoveRandom random;
 
         private void Awake()
         {
@@ -26,9 +28,14 @@ namespace PK.PokerGame
             enemyDetector= GetComponentInChildren<EnemyDetector>();
             aIMove= GetComponentInChildren<AIMove>();
             ýHandBuilder= GetComponentInChildren<AIHandBuilder>();
+            random = GetComponentInChildren<AIMoveRandom>();
             colliders = GetComponentsInChildren<Collider>();
+            bound = GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider>();
         }
-
+        private void Start()
+        {
+            random.boundRange = bound;
+        }
         public void FightEnded()
         {
             aIMove.ToggleCanMove(true);
@@ -42,7 +49,6 @@ namespace PK.PokerGame
         public void Lose()
         {
             animationController.DeadAnim();
-            Debug.Log("BirSüreSonraYokOlacak");
             dieFeedBack.PlayFeedbacks();
         }
         public void FightStarted()

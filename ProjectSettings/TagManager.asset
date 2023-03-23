@@ -8,6 +8,7 @@ TagManager:
   - AIHand
   - AI
   - DontDistrupt
+  - Ground
   layers:
   - Default
   - TransparentFX
