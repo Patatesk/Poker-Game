@@ -13,6 +13,7 @@ namespace PK.PokerGame
         private AnimationController animationController;
         private PlayerController playerController;
         private EnemyDetector enemyDetector;
+        private PlayerStarHandler playerStarHandler;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace PK.PokerGame
             animationController = GetComponentInChildren<AnimationController>();
             playerController= GetComponentInChildren<PlayerController>();
             enemyDetector= GetComponentInChildren<EnemyDetector>();
+            playerStarHandler= GetComponentInChildren<PlayerStarHandler>();
         }
 
         private void Update()

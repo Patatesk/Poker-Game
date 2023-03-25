@@ -19,6 +19,7 @@ namespace PK.PokerGame
         private Mediator mediator;
         private Player player;
         private AI AI;
+        private PlayerStarHandler playerStarHandler;
 
         public int handRank;
         public int ranksBiggestNumber;
@@ -29,6 +30,7 @@ namespace PK.PokerGame
             mediator = GameObject.FindObjectOfType<Mediator>();
             player = GetComponent<Player>();
             AI = GetComponent<AI>();
+            playerStarHandler = GetComponent<PlayerStarHandler>();
         }
         private void OnEnable()
         {
@@ -73,6 +75,10 @@ namespace PK.PokerGame
             var ranking = handRanker.GetHandRank(hand);
             handRank = ranking.handRank;
             ranksBiggestNumber = ranking.biggestNumber;
+            if (!isPlayer) return;
+            if (handRank == 1 || handRank == 2 || handRank == 3) playerStarHandler.SetStars(1);
+            else if (handRank == 4 || handRank == 5 || handRank == 6) playerStarHandler.SetStars(2);
+            else playerStarHandler.SetStars(3);
         }
         private void PublishCard(Card card)
         {

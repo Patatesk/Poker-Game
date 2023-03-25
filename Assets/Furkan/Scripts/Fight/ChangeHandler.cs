@@ -39,7 +39,7 @@ namespace PK.PokerGame
         {
             mediator.DeleteSubscriber<ChangeCardDelivery>(AddCard);
         }
-        [ContextMenu("Deneme")]
+
         public void CahngeCards()
         {
             if (toAdd == null) return;

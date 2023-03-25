@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using MoreMountains.Feedbacks;
 
 namespace PK.PokerGame
 {
@@ -13,15 +14,20 @@ namespace PK.PokerGame
         [SerializeField] private GameObject fightUI;
         [SerializeField] private RectTransform AýHand;
         [SerializeField] private RectTransform playerHand;
-        [SerializeField] private GameObject youWin, youLose,vs;
+        [SerializeField] private GameObject youWin, youLose,vs,pickAcard,Select2Cards;
         [SerializeField] private GameObject extraCardParts;
         [SerializeField] private GameObject discardButton;
-        private float discardTime = 2f;
+        [SerializeField] private MMF_Player Select2CardsFeedback;
+        [SerializeField] private MMF_Player Select1CardFeedback;
+
+        private float discardTime = 1f;
         private float aýStartPos;
         private float playerStartPos;
-        public bool changeCard;
         private bool isFighting;
         private float _discardTime;
+
+        public bool changeCard;
+
         private void Awake()
         {
             aýStartPos = AýHand.anchoredPosition.y;
@@ -76,6 +82,8 @@ namespace PK.PokerGame
                     discardButton.SetActive(true);
                     CanSelectableSignal.Trigger(true);
                     yield return new WaitUntil( () => changeCard == true);
+                    pickAcard.SetActive(false);
+                    Select2Cards.SetActive(false);
                     player.Win(2);
                     fighterAI.Lose();
                 }
@@ -96,7 +104,7 @@ namespace PK.PokerGame
                 FightIsOver();
             }
         }
-
+        
         public void CardsChanged()
         {
             changeCard = true;
@@ -120,7 +128,14 @@ namespace PK.PokerGame
         {
             if (player.HandRank() > fighterAI.HandRank())
             {
-                youWin.SetActive(true);
+                if(player.TotalCardCount() < 5)
+                {
+                    Select1CardFeedback.PlayFeedbacks();
+                }
+                else
+                {
+                    Select2CardsFeedback.PlayFeedbacks();
+                }
                
                 return "Player";
             }
@@ -134,8 +149,16 @@ namespace PK.PokerGame
             {
                 if (player.BiggestNumber() > fighterAI.BiggestNumber())
                 {
-                    
-                    youWin.SetActive(true);
+
+
+                    if (player.TotalCardCount() < 5)
+                    {
+                        Select1CardFeedback.PlayFeedbacks();
+                    }
+                    else
+                    {
+                        Select2CardsFeedback.PlayFeedbacks();
+                    }
                     return "Player";
                 }
                 else
