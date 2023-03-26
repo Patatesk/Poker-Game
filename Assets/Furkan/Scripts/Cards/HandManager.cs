@@ -92,8 +92,9 @@ namespace PK.PokerGame
         }
         private void Discard(Card card)
         {
-            if (!hand.Contains(card)) return;
+
             if (!isPlayer) return;
+            if (!card.transform.parent.CompareTag("Deck")) return;
             hand.Remove(card);
             totalCardCount--;
         }

@@ -121,6 +121,7 @@ namespace PK.PokerGame
 
         private void ResetCard(Card card)
         {
+            if (!card.transform.parent.CompareTag("Deck")) return;
             if (card == this) return;
             if (selected)
                 frontFace.DOLocalMoveY(startPos, .5f);
