@@ -10,8 +10,9 @@ namespace PK.PokerGame
     {
         private Transform parent;
         [SerializeField] private GameObject handPrefab;
-
+        private HandChildHandler handChildHandler;
         private Mediator mediator;
+        private bool coolDown;
         private void Awake()
         {
             mediator = GameObject.FindAnyObjectByType<Mediator>();
@@ -28,13 +29,22 @@ namespace PK.PokerGame
         }
         private void BuildHand(List<Card> hand)
         {
+            if (coolDown) return;
+            coolDown = true;
+            Invoke("CoolDown", 0.2f);
             HandChildHandler handObj = Instantiate(handPrefab,parent).GetComponent<HandChildHandler>();
+            if(handChildHandler != null) Destroy(handChildHandler);
+            handChildHandler= handObj;
             handObj.transform.GetComponent<RectTransform>().anchoredPosition= Vector3.zero;
             foreach (Card card in hand)
             {
                 RequestCardFoAI(card,handObj);
             }     
 
+        }
+        private void CoolDown()
+        {
+            coolDown = false;
         }
 
         private void RequestCardFoAI(Card card,HandChildHandler hand)

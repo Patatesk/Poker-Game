@@ -7,13 +7,21 @@ namespace PK.PokerGame
 {
     public class CheckTargetisStillWAlid : AIDecision
     {
+        AIStateMachine stateMachine;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            stateMachine= transform.root.GetComponent<AIStateMachine>();
+        }
         public override bool Decide()
         {
+            if(stateMachine.Target == null) return false;
            
-            if (_brain.Target.gameObject.activeSelf) return true;
+            if (stateMachine.Target.gameObject.activeSelf) return true;
             else
             {
-                _brain.Target = null;
+                stateMachine.Target = null;
                 return false;
             }
         }

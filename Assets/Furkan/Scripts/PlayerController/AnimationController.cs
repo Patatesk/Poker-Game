@@ -45,6 +45,10 @@ namespace PK.PokerGame
             animator.SetBool(idleParameter, false);
             animator.SetBool(moveParameter, false);
         }
+        public void CloseRootMotion()
+        {
+            animator.applyRootMotion = false;
+        }
 
 
     }

@@ -8,7 +8,7 @@ namespace PK.PokerGame
     public class Player : MonoBehaviour
     {
         [SerializeField] private float scaleUpAmount = 0.15f;
-
+        
         private HandManager handManager;
         private AnimationController animationController;
         private PlayerController playerController;
@@ -35,12 +35,13 @@ namespace PK.PokerGame
         {
             enemyDetector.enemyDetected= false;
             playerController.canMove= true;
-            gameObject.tag = TagContainer.PlayerTag;
+            gameObject.layer = 7;
         }
         public void Lose()
         {
             animationController.DeadAnim();
-            Debug.Log("LoseScreen");
+            LoseScreenSignal.Trigger();
+            enemyDetector.GetComponent<BoxCollider>().enabled = false;
         }
         public void Win(float time)
         {

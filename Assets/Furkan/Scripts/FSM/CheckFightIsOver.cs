@@ -7,7 +7,7 @@ namespace PK.PokerGame
 {
     public class CheckFightIsOver : AIDecision
     {
-        public bool fightIsOver;
+        public bool fightIsOver = true;
         public override bool Decide()
         {
             return fightIsOver;

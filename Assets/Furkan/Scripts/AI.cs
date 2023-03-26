@@ -3,6 +3,7 @@ using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace PK.PokerGame
 {
@@ -19,7 +20,8 @@ namespace PK.PokerGame
         private AIHandBuilder ýHandBuilder;
         private Collider[] colliders;
         private AIMoveRandom random;
-
+        private CheckFightIsOver checkFight;
+        private NavMeshAgent agent;
         private void Awake()
         {
             handManager = GetComponentInChildren<HandManager>();
@@ -30,17 +32,25 @@ namespace PK.PokerGame
             ýHandBuilder= GetComponentInChildren<AIHandBuilder>();
             random = GetComponentInChildren<AIMoveRandom>();
             colliders = GetComponentsInChildren<Collider>();
+            checkFight = GetComponentInChildren<CheckFightIsOver>();
             bound = GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider>();
+            agent = GetComponentInChildren<NavMeshAgent>();
         }
-        private void Start()
+        private IEnumerator Start()
         {
             random.boundRange = bound;
+            yield return new WaitForSeconds(0.2f);
+            AddAISignal.Trigger();
+
         }
+        
+        
         public void FightEnded()
         {
+            checkFight.fightIsOver = true;
             aIMove.ToggleCanMove(true);
             stateMachine.TransitionToState("Random");
-            gameObject.tag = TagContainer.AITag;
+            gameObject.layer = 7;
             foreach (Collider collider in colliders)
             {
                 collider.enabled = true;
@@ -49,7 +59,10 @@ namespace PK.PokerGame
         public void Lose()
         {
             animationController.DeadAnim();
+            animationController.CloseRootMotion();
             dieFeedBack.PlayFeedbacks();
+            enemyDetector.GetComponent<BoxCollider>().enabled = false;
+            DeadAISignal.Trigger();
         }
         public void FightStarted()
         {
@@ -58,6 +71,16 @@ namespace PK.PokerGame
             {
                 collider.enabled = false;
             }
+        }
+        public void AIFightStarted()
+        {
+            checkFight.fightIsOver = false;
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
+            ForceToFight();
+
         }
         public void Win(float time)
         {
@@ -84,10 +107,11 @@ namespace PK.PokerGame
 
         public void ForceToFight()
         {
-            stateMachine.TransitionToState("Idle");
+            aIMove.ToggleCanMove(false);
+            checkFight.fightIsOver = false;
             enemyDetector.enemyDetected = true;
             animationController.IdleAnim();
-            aIMove.ToggleCanMove(false);
+           
         }
     }
 }

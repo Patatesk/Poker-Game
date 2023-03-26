@@ -17,35 +17,45 @@ namespace PK.PokerGame
 
         private void OnTriggerEnter(Collider other)
         {
+            gameObject.GetComponent<BoxCollider>().enabled= false;
+            Transform otherObj = CheckifHasAParent.CheckParent(other.transform);
+            Transform thisObj = CheckifHasAParent.CheckParent(transform);
             if (isPlayer)
             {
-                if (other.CompareTag(TagContainer.AITag))
+                if (otherObj.CompareTag(TagContainer.AITag))
                 {
-                    AI ai = other.transform.root.GetComponent<AI>();
+                    AI ai = otherObj.transform.root.GetComponent<AI>();
                     ai.ForceToFight();
-                    other.transform.root.tag = TagContainer.DontDisturbTag;
-                    tag =  TagContainer.DontDisturbTag;
+                    otherObj.gameObject.layer = 9;
+                    thisObj.gameObject.layer =  9;
                     StartFightSignal.Trigger(transform.root.GetComponent<Player>(), ai);
                     enemyDetected = true;
                 }
             }
             else
             {
-                if (other.CompareTag(TagContainer.AITag))
+                if (otherObj.CompareTag(TagContainer.AITag))
                 {
-                    other.transform.root.tag = TagContainer.DontDisturbTag;
-                    transform.root.tag = TagContainer.DontDisturbTag;
-                    
+                    if (other.transform.root == transform.root) return;
+                    AI ai = otherObj.transform.root.GetComponent<AI>();
+                    ai.ForceToFight();
+                    AI self = this.transform.root.GetComponent<AI>();
+                    self.ForceToFight();
+                    otherObj.gameObject.layer = 9;
+                    thisObj.gameObject.layer = 9;
+                    StartAIFightSignal.Trigger(ai, self);
                     enemyDetected = true;
                 }
-                else if (other.CompareTag(TagContainer.PlayerTag))
+                else if (otherObj.CompareTag(TagContainer.PlayerTag))
                 {
-                    Player player = other.GetComponent<Player>();
+                    Player player = otherObj.GetComponent<Player>();
                     player.ForceToFight();
+                    AI self = this.transform.root.GetComponent<AI>();
+                    self.ForceToFight();
                     enemyDetected = true;
-                    other.tag = TagContainer.DontDisturbTag;
-                    transform.root.tag = TagContainer.DontDisturbTag;
-                    StartFightSignal.Trigger(player, transform.root.GetComponent<AI>());
+                    otherObj.gameObject.layer = 9;
+                    thisObj.gameObject.layer = 9;
+                    StartFightSignal.Trigger(player, self);
                 }
             }
 

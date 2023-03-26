@@ -907,9 +907,6 @@ MonoBehaviour:
   star1: {fileID: 7481630293035525933}
   star2: {fileID: 2349758056492111194}
   star3: {fileID: 2536407913738016214}
-  pos1Star: {fileID: 1095843291}
-  pos2Star: {fileID: 109274415}
-  pos3Star: {fileID: 2064335034}
 --- !u!1 &2082127855965098202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1351,7 @@ GameObject:
   - component: {fileID: 6018676365384743769}
   - component: {fileID: 8479330069291584424}
   - component: {fileID: 3394522537945588682}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

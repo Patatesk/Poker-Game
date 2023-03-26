@@ -556,11 +556,12 @@ GameObject:
   - component: {fileID: 1359506459556836885}
   - component: {fileID: 1359506459556836884}
   - component: {fileID: 93413269}
-  - component: {fileID: 7966680879748290214}
   - component: {fileID: 93413276}
   - component: {fileID: 93413277}
   - component: {fileID: 93413285}
   - component: {fileID: 2237179692998622492}
+  - component: {fileID: 1734349859}
+  - component: {fileID: 1734349860}
   m_Layer: 7
   m_Name: AI
   m_TagString: AI
@@ -577,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 1359506459556836894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1359506461555085659}
@@ -614,9 +615,6 @@ MonoBehaviour:
       - Decision: {fileID: 1359506461464913106}
         TrueState: MoveToEnemy
         FalseState: 
-      - Decision: {fileID: 4108695208548628697}
-        TrueState: Idle
-        FalseState: 
   - StateName: MoveCard
     Actions:
       array:
@@ -632,9 +630,6 @@ MonoBehaviour:
       - Decision: {fileID: 1998626349}
         TrueState: 
         FalseState: Random
-      - Decision: {fileID: 4108695208548628697}
-        TrueState: Idle
-        FalseState: 
   - StateName: MoveToEnemy
     Actions:
       array:
@@ -650,18 +645,6 @@ MonoBehaviour:
       - Decision: {fileID: 484891775}
         TrueState: 
         FalseState: Random
-      - Decision: {fileID: 4108695208548628697}
-        TrueState: Idle
-        FalseState: 
-  - StateName: Idle
-    Actions:
-      array:
-      - {fileID: 93413277}
-    Transitions:
-      array:
-      - Decision: {fileID: 93413276}
-        TrueState: Random
-        FalseState: 
   TimeInThisState: 0
   Target: {fileID: 0}
   _lastKnownTargetPosition: {x: 0, y: 0, z: 0}
@@ -688,8 +671,8 @@ NavMeshAgent:
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 180
-  m_StoppingDistance: 0.1
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.33
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -744,21 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b04b6e209a190459c53d2a09aeaded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldMoveTreshhold: 0.1
---- !u!114 &7966680879748290214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359506459556836894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c19a04d1d9fa140a274223e7e66f1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handPrefab: {fileID: 1201305546767210273, guid: c1fee8ebd0dfcb0448576d18e8efdc0b,
-    type: 3}
+  shouldMoveTreshhold: 0.33
 --- !u!114 &93413276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,6 +783,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5306967, z: 0.83707285}
   m_Center: {x: 0, y: -0.15648395, z: 0.081463575}
+--- !u!114 &1734349859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359506459556836894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e060712ebae84b84abe0366f1fa3f717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationMode: 0
+  Label: Idle
+--- !u!114 &1734349860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359506459556836894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eba2c7181ae1fe4d847f6d5437be2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: CheckFight
+  fightIsOver: 0
 --- !u!1 &1359506459642833062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +1022,7 @@ MonoBehaviour:
   Label: CheckEnemy
   enemyMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   checkRadius: 5
   cardManager: {fileID: 1359506459556836885}
 --- !u!1 &1359506461555085656
@@ -1071,7 +1068,7 @@ GameObject:
   - component: {fileID: 8603303648574424995}
   - component: {fileID: 6378343711950456564}
   - component: {fileID: 4108695208548628697}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1441,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
@@ -1471,6 +1468,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2622753384463669962, guid: e3e5ae547ef9fda4889b7d94cd911dca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8aded8564340c524e93dd28000cdcd9e, type: 2}
     - target: {fileID: 2851613033621420984, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
       propertyPath: m_Layer

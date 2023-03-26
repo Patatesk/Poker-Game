@@ -24,6 +24,7 @@ namespace PK.PokerGame
         public override void OnEnterState()
         {
             base.OnEnterState();
+            if(stateMachine.navMeshAgent.isActiveAndEnabled)
             stateMachine.navMeshAgent.ResetPath();
         }
         public override void PerformAction()

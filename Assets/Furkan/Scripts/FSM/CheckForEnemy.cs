@@ -24,8 +24,9 @@ namespace PK.PokerGame
 
             if (colliders.Length != 0)
             {
-                if (_brain.Target == null)
-                    _brain.Target = colliders[0].transform;
+                Transform target = colliders[0].transform;
+                if (stateMachine.Target == null && target.gameObject.layer != gameObject.layer)
+                    stateMachine.Target = colliders[0].transform;
                 return true;
             }
             else return false;

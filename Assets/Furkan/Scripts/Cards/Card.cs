@@ -104,6 +104,7 @@ namespace PK.PokerGame
                 delivery.siblingIndex = transform.GetSiblingIndex();
                 delivery.isOwnedByPlayer = transform.parent.parent.GetComponent<DeckHandler>().isOwnedBuyPlayer;
                 delivery.parent = transform.parent;
+                delivery.totalCard = transform.parent.childCount - 5;
                 mediator.Publish(delivery);
             }
 

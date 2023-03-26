@@ -61,7 +61,6 @@ namespace PK.PokerGame
             }
             AddCardToHandRankHand(card);
             PublishCard(card);
-            totalCardCount++;
             if(isPlayer)
             player.ScaleUp(totalCardCount);
             else
@@ -72,6 +71,7 @@ namespace PK.PokerGame
         public void AddCardToHandRankHand(Card card)
         {
             hand.Add(card);
+            totalCardCount++;
             var ranking = handRanker.GetHandRank(hand);
             handRank = ranking.handRank;
             ranksBiggestNumber = ranking.biggestNumber;
@@ -92,8 +92,10 @@ namespace PK.PokerGame
         }
         private void Discard(Card card)
         {
+            if (!hand.Contains(card)) return;
             if (!isPlayer) return;
-            hand.Remove(card); 
+            hand.Remove(card);
+            totalCardCount--;
         }
         private void GetRandomTwoCard()
         {

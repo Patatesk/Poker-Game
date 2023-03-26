@@ -37,10 +37,12 @@ namespace PK.PokerGame
         private void OnEnable()
         {
             StartFightSignal.FightStarter += StartSequence;
+            StartAIFightSignal.FightStarter += StartAIFight;
         }
         private void OnDisable()
         {
             StartFightSignal.FightStarter -= StartSequence;
+            StartAIFightSignal.FightStarter -= StartAIFight;
         }
         private void StartSequence(Player player, AI fighterAI)
         {
@@ -55,7 +57,6 @@ namespace PK.PokerGame
         {
             if (!isFighting)
             {
-               
                 extraCardParts.SetActive(false);
                 isFighting = true;
                 player.FightSarted();
@@ -74,7 +75,7 @@ namespace PK.PokerGame
                 yield return new WaitForSeconds(1f);
                 AýHand.GetComponent<ChangeChild>().TurnFoward();
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1.5f);
                 vs.SetActive(false);
                 string winner = FindWinner(player, fighterAI);
                 if(winner == "Player")
@@ -84,6 +85,7 @@ namespace PK.PokerGame
                     yield return new WaitUntil( () => changeCard == true);
                     pickAcard.SetActive(false);
                     Select2Cards.SetActive(false);
+                    discardButton.SetActive(false);
                     player.Win(2);
                     fighterAI.Lose();
                 }
@@ -100,7 +102,7 @@ namespace PK.PokerGame
                 playerHand.DOAnchorPosY(playerStartPos, 1f);
 
 
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
                 FightIsOver();
             }
         }
@@ -169,7 +171,41 @@ namespace PK.PokerGame
                 }
             }
         }
+        private void StartAIFight(AI ai1, AI ai2)
+        {
+            StartCoroutine(AIFights(ai1,ai2));
+        }
+        private IEnumerator AIFights(AI ai1, AI ai2)
+        {
+            ai1.AIFightStarted();
+            ai2.AIFightStarted();
+            yield return new WaitForSeconds(1);
+            if(ai1.HandRank() > ai2.HandRank())
+            {
+                ai1.Win(0);
+                ai2.Lose();
+            }
+            else if(ai1.HandRank() == ai2.HandRank())
+            {
+                if(ai1.BiggestNumber() > ai2.BiggestNumber())
+                {
+                    ai1.Win(0);
+                    ai2.Lose();
+                }
+                else
+                {
+                    ai1.Lose();
+                    ai2.Win(0);
+                }
+            }
+            else
+            {
+                ai1.Lose();
+                ai2.Win(0);
+            }
 
+            
+        }
         private void FightIsOver()
         {
             isFighting= false;
@@ -190,6 +226,15 @@ namespace PK.PokerGame
         public static void Trigger(Player player, AI fighterAI)
         {
             FightStarter?.Invoke(player, fighterAI);
+        }
+    }
+
+    public class StartAIFightSignal
+    {
+        public static event Action<AI, AI> FightStarter;
+        public static void Trigger(AI aI, AI fighterAI)
+        {
+            FightStarter?.Invoke(aI, fighterAI);
         }
     }
 }

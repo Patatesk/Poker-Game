@@ -29,8 +29,9 @@ namespace PK.PokerGame
 
         private void GetRandomPointsInBound()
         {
-            float x = Random.Range(boundRange.bounds.min.x, boundRange.bounds.max.x);
-            float z = Random.Range(boundRange.bounds.min.z, boundRange.bounds.max.z);
+            if (!stateMachine.navMeshAgent.isActiveAndEnabled) return;
+            float x = Random.Range(boundRange.bounds.min.x+10, boundRange.bounds.max.x-10);
+            float z = Random.Range(boundRange.bounds.min.z+10, boundRange.bounds.max.z-10);
             Vector3 _move = new Vector3(x, transform.position.y, z);
             move.MoveToPos(_move);
         }

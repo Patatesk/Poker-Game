@@ -19,6 +19,7 @@ namespace PK.PokerGame
         private Transform parent;
         private int siblinIndex = 10;
         private HandChildHandler playerHandChildHandler;
+        private int totalCards;
         private void Awake()
         {
             mediator = GameObject.FindAnyObjectByType<Mediator>();
@@ -42,7 +43,8 @@ namespace PK.PokerGame
 
         public void CahngeCards()
         {
-            if (toAdd == null) return;
+            if (toAdd == null ) return;
+            if (toDiscard == null && player.TotalCardCount() >= 5) return;
             CanSelectableSignal.Trigger(false);
             if(toDiscard != null)  toDiscard.discardFeedback.PlayFeedbacks();
             if (parent == null) parent= playerHandChildHandler.transform.GetChild(0);
@@ -53,11 +55,18 @@ namespace PK.PokerGame
             fightManager.CardsChanged();
             toAdd.UnSelect();
             buttons.SetActive(false);
-
+            toDiscard = null;
+            parent = null;
+            siblinIndex = 10;
+            toAdd = null;
         }
 
         public void Discard()
         {
+            toDiscard = null;
+            parent = null;
+            siblinIndex = 10;
+            toAdd= null;
             fightManager.CardsChanged();
             fightManager.ChangeDiscardTime(.2f);
         }
@@ -79,6 +88,7 @@ namespace PK.PokerGame
                 toDiscard = delivery.card;
                 parent = delivery.parent;
                 siblinIndex = delivery.siblingIndex;
+                totalCards = delivery.totalCard;
                 toDiscard.Select(100);
             }
             else
@@ -100,5 +110,6 @@ namespace PK.PokerGame
         public Card card;
         public Transform parent;
         public int siblingIndex;
+        public int totalCard;
     }
 }

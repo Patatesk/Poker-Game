@@ -14,13 +14,12 @@ namespace PK.PokerGame
         private AnimationController animController;
         private Vector2 Velocity;
         private Vector2 SmoothDeltaPosition;
-        private bool canMove = true;
 
 
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
-            animController= GetComponent<AnimationController>();
+            animController = GetComponent<AnimationController>();
             agent.updatePosition = false;
             agent.updateRotation = true;
         }
@@ -35,13 +34,22 @@ namespace PK.PokerGame
 
         public void ToggleCanMove(bool move)
         {
-            canMove= move;
-            agent.enabled= move;
+            if (!move)
+            {
+                animController.IdleAnim();
+                agent.speed = 0;
+            }
+            else
+            {
+                animController.MoveAnim();
+                agent.speed = 3;
+            }
+
         }
 
         private void Update()
         {
-            if (!canMove) return;
+            //if (!canMove) return;
             SynchronizeAnimatorAndAgent();
         }
 
@@ -68,12 +76,12 @@ namespace PK.PokerGame
             }
 
             bool shouldMove = Velocity.magnitude > shouldMoveTreshhold
-                && agent.remainingDistance > agent.stoppingDistance;
+                && agent.remainingDistance > agent.stoppingDistance && agent.speed > 0;
 
             animController.MoveAnim(shouldMove, Velocity.magnitude);
 
             float deltaMagnitude = worldDeltaPosition.magnitude;
-            if (deltaMagnitude > agent.radius / 2f)
+            if (deltaMagnitude > agent.radius / 5f)
             {
                 transform.position = Vector3.Lerp(
                     animController.GetRootPos(),
@@ -89,7 +97,7 @@ namespace PK.PokerGame
         }
         public void ChangeTargetandMove(Transform _target)
         {
-            
+            if (!agent.isActiveAndEnabled) return;
             target = _target;
             targetPos = target.position;
             agent.SetDestination(target.position);
