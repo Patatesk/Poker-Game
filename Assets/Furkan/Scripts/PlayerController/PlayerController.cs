@@ -14,6 +14,7 @@ namespace PK.PokerGame
         private CharacterController characterController;
         private float gravityValue = -9.81f;
 
+        public bool applyGravity = true;
         public bool canMove = true;
 
         private void Awake()
@@ -29,6 +30,19 @@ namespace PK.PokerGame
         private void OnDestroy()
         {
             input.Disable();
+        }
+
+        public void Obstackle()
+        {
+            canMove = false;
+            anim.FallAnim();
+            applyGravity = false;
+            Invoke("ChangeCanMove", 3f);
+        }
+
+        private void ChangeCanMove()
+        {
+            canMove = true;
         }
 
         void Update()
@@ -49,9 +63,12 @@ namespace PK.PokerGame
 
             // Changes the height position of the player..
 
+            if (applyGravity)
+            {
+                playerVelocity.y += gravityValue * Time.deltaTime;
+                characterController.Move(playerVelocity * Time.deltaTime);
 
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            characterController.Move(playerVelocity * Time.deltaTime);
+            }
             if (input.Player.RotateAndMove.IsPressed())
             {
                 anim.MoveAnim();

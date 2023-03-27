@@ -17,13 +17,14 @@ namespace PK.PokerGame
 
         private void OnTriggerEnter(Collider other)
         {
-            gameObject.GetComponent<BoxCollider>().enabled= false;
             Transform otherObj = CheckifHasAParent.CheckParent(other.transform);
             Transform thisObj = CheckifHasAParent.CheckParent(transform);
             if (isPlayer)
             {
+
                 if (otherObj.CompareTag(TagContainer.AITag))
                 {
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
                     AI ai = otherObj.transform.root.GetComponent<AI>();
                     ai.ForceToFight();
                     otherObj.gameObject.layer = 9;
@@ -36,6 +37,8 @@ namespace PK.PokerGame
             {
                 if (otherObj.CompareTag(TagContainer.AITag))
                 {
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+
                     if (other.transform.root == transform.root) return;
                     AI ai = otherObj.transform.root.GetComponent<AI>();
                     ai.ForceToFight();
@@ -48,6 +51,8 @@ namespace PK.PokerGame
                 }
                 else if (otherObj.CompareTag(TagContainer.PlayerTag))
                 {
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+
                     Player player = otherObj.GetComponent<Player>();
                     player.ForceToFight();
                     AI self = this.transform.root.GetComponent<AI>();

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,11 @@ namespace PK.PokerGame
         private AnimationController animController;
         private Vector2 Velocity;
         private Vector2 SmoothDeltaPosition;
-
+        private AI ai;
 
         private void Awake()
         {
+            ai= GetComponent<AI>();
             agent = GetComponent<NavMeshAgent>();
             animController = GetComponent<AnimationController>();
             agent.updatePosition = false;
@@ -46,15 +48,30 @@ namespace PK.PokerGame
             }
 
         }
+        public void Obstackle()
+        {
+            animController.CloseRootMotion();
+            agent.speed = 0;
+            animController.FallAnim();
+            Invoke("EnableAgent", 5);
+
+        }
+        private void EnableAgent()
+        {
+            if (ai.inFight) return;
+            agent.enabled=true;
+            agent.speed = 3;
+            animController.OpenRootMotion();
+        }
 
         private void Update()
         {
-            //if (!canMove) return;
             SynchronizeAnimatorAndAgent();
         }
 
         private void SynchronizeAnimatorAndAgent()
         {
+            if (agent.enabled == false) return;
             Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
             worldDeltaPosition.y = 0;
 

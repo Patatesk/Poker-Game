@@ -22,6 +22,7 @@ namespace PK.PokerGame
         private AIMoveRandom random;
         private CheckFightIsOver checkFight;
         private NavMeshAgent agent;
+        public bool inFight;
         private void Awake()
         {
             handManager = GetComponentInChildren<HandManager>();
@@ -44,13 +45,27 @@ namespace PK.PokerGame
 
         }
         
-        
+        public void TouchedObstackle()
+        {
+            gameObject.layer = 10;
+            aIMove.Obstackle();
+            Invoke("ChangeLayer", 10);
+        }
+
+        private void ChangeLayer()
+        {
+            if (inFight) return; 
+            gameObject.layer =7;
+        }
+
         public void FightEnded()
         {
+            inFight = false;
             checkFight.fightIsOver = true;
             aIMove.ToggleCanMove(true);
             stateMachine.TransitionToState("Random");
-            gameObject.layer = 7;
+            ChangeLayer();
+            enemyDetector.GetComponent<BoxCollider>().enabled = true;
             foreach (Collider collider in colliders)
             {
                 collider.enabled = true;
@@ -66,6 +81,7 @@ namespace PK.PokerGame
         }
         public void FightStarted()
         {
+            inFight = true;
             handManager.BuildAIHand();
             foreach (Collider collider in colliders)
             {

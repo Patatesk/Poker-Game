@@ -714,6 +714,7 @@ MonoBehaviour:
   idleParameter: Idle
   deadParameter: Dying
   locomotionParameter: locomotion
+  Fall: Fall
   animOfsset: 1
 --- !u!114 &93413269
 MonoBehaviour:
@@ -1101,8 +1102,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.67}
-  m_Center: {x: 0, y: -0.33, z: 0.06}
+  m_Size: {x: 1, y: 2.5590882, z: 0.67}
+  m_Center: {x: 0, y: -1.1095433, z: 0.059999984}
 --- !u!114 &4108695208548628697
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ namespace PK.PokerGame
         [SerializeField] private string idleParameter;
         [SerializeField] private string deadParameter;
         [SerializeField] private string locomotionParameter;
+        [SerializeField] private string Fall = "Fall";
         [SerializeField] private float animOfsset;
 
         private void Start()
@@ -45,9 +46,19 @@ namespace PK.PokerGame
             animator.SetBool(idleParameter, false);
             animator.SetBool(moveParameter, false);
         }
+        public void FallAnim()
+        {
+            animator.SetBool(idleParameter, false);
+            animator.SetBool(moveParameter, false);
+            animator.SetTrigger(Fall);
+        }
         public void CloseRootMotion()
         {
             animator.applyRootMotion = false;
+        } 
+        public void OpenRootMotion()
+        {
+            animator.applyRootMotion = true;
         }
 
 

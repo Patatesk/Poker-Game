@@ -25,6 +25,7 @@ namespace PK.PokerGame
         private bool selected;
         private Transform frontFace;
         private Transform backFace;
+        private Collider _collider;
         public bool forUI
         {
             get
@@ -41,6 +42,7 @@ namespace PK.PokerGame
             mediator = GameObject.FindAnyObjectByType<Mediator>();
             frontFace = transform.GetChild(1).GetChild(1);
             backFace = transform.GetChild(1).GetChild(0);
+            _collider = GetComponent<Collider>();
         }
         public void Discard()
         {
@@ -52,6 +54,7 @@ namespace PK.PokerGame
             ChooseModeSignal.ChooseMode += ChangeChooseMode;
             ResetCardSignal.ResetSignal += ResetCard;
             CanSelectableSignal.canSelectable += ChangeWinPrize;
+            _collider.enabled = true;
         }
         private void OnDisable()
         {
@@ -121,7 +124,6 @@ namespace PK.PokerGame
 
         private void ResetCard(Card card)
         {
-            if (!card.transform.parent.CompareTag("Deck")) return;
             if (card == this) return;
             if (selected)
                 frontFace.DOLocalMoveY(startPos, .5f);
@@ -129,10 +131,21 @@ namespace PK.PokerGame
 
 
         }
-        private void OnTriggerEnter(Collider other)
+        public void CollectedEvent()
         {
             GetBackQueueSignal.Trigger(this);
             this.gameObject.SetActive(false);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagContainer.AITag))
+            {
+                CollectedEvent();
+            }
+
+            if(other.CompareTag(TagContainer.PlayerTag))
+                    _collider.enabled = false;
+
         }
     }
 

@@ -40,7 +40,7 @@ namespace PK.PokerGame
             if(other.CompareTag("Card"))
             {
                 _brain.Target= null;
-                stateMachine.navMeshAgent.ResetPath();
+                if(stateMachine.navMeshAgent.enabled) stateMachine.navMeshAgent.ResetPath();
                 stateMachine.handManager.AddCardToHand(other.GetComponent<Card>());
             }
         }

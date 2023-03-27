@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace PK.PokerGame
     public class Player : MonoBehaviour
     {
         [SerializeField] private float scaleUpAmount = 0.15f;
+        [SerializeField] private MMF_Player winFeedBack;
+        [SerializeField] private MMF_Player loseFeedBack;
         
         private HandManager handManager;
         private AnimationController animationController;
@@ -35,16 +38,35 @@ namespace PK.PokerGame
         {
             enemyDetector.enemyDetected= false;
             playerController.canMove= true;
-            gameObject.layer = 7;
+            gameObject.layer = 8;
+            enemyDetector.GetComponent<Collider>().enabled = true;
+
+        }
+        public void TouchedObstackle()
+        {
+            gameObject.layer = 10;
+            playerController.Obstackle();
+            Invoke("ChangeLayer", 10);
+            animationController.CloseRootMotion();
+        }
+
+        private void ChangeLayer()
+        {
+            gameObject.layer =8;
+            playerController.applyGravity = true;
+            animationController.OpenRootMotion();
+            enemyDetector.GetComponent<BoxCollider>().enabled = true;
         }
         public void Lose()
         {
+            loseFeedBack.PlayFeedbacks();
             animationController.DeadAnim();
             LoseScreenSignal.Trigger();
             enemyDetector.GetComponent<BoxCollider>().enabled = false;
         }
         public void Win(float time)
         {
+            winFeedBack.PlayFeedbacks();
             Invoke("FightEnded", time);
 
         }
