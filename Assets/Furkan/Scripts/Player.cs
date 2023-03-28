@@ -8,6 +8,8 @@ namespace PK.PokerGame
 {
     public class Player : MonoBehaviour
     {
+        public bool isfight;
+
         [SerializeField] private float scaleUpAmount = 0.15f;
         [SerializeField] private int basicIncomePerWin= 100;
         [SerializeField] private MMF_Player winFeedBack;
@@ -34,6 +36,11 @@ namespace PK.PokerGame
                 animationController.IdleAnim();
             }
         }
+
+        public void Fightchange(bool value)
+        {
+            isfight=value;
+        }
         
         public void FightEnded()
         {
@@ -42,7 +49,6 @@ namespace PK.PokerGame
             gameObject.layer = 8;
             fightStarter.gameObject.layer = 12;
             fightStarter.GetComponent<Collider>().enabled = true;
-
         }
         public void TouchedObstackle()
         {
@@ -68,16 +74,18 @@ namespace PK.PokerGame
         }
         public void Win(float time)
         {
+            animationController.Victory();
             fightStarter.ResetFight();
             winFeedBack.PlayFeedbacks();
             AddMoneySignal.Trigger(basicIncomePerWin);
             Invoke("FightEnded", time);
 
         }
+        
         public void FightSarted()
         {
-    
-
+            Fightchange(true);
+            fightStarter.gameObject.layer = 9;
         }
         public int HandRank()
         {
@@ -108,6 +116,7 @@ namespace PK.PokerGame
         public void AddCard(Card card)
         {
             handManager.AddCardToHandRankHand(card);
+            ScaleUp(TotalCardCount());
         }
 
     }

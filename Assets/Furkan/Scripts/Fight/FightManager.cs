@@ -23,7 +23,7 @@ namespace PK.PokerGame
         private float discardTime = 1f;
         private float aýStartPos;
         private float playerStartPos;
-        private bool isFighting;
+        public bool isFighting;
         private float _discardTime;
 
         public bool changeCard;
@@ -88,7 +88,8 @@ namespace PK.PokerGame
                     pickAcard.SetActive(false);
                     Select2Cards.SetActive(false);
                     discardButton.SetActive(false);
-                   
+                    CanSelectableSignal.Trigger(false);
+                    player.Fightchange(false);
                 }
                 else
                 {

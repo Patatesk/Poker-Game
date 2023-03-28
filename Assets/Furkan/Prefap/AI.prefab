@@ -715,6 +715,7 @@ MonoBehaviour:
   deadParameter: Dying
   locomotionParameter: locomotion
   Fall: Fall
+  victory: Victory
   animOfsset: 1
 --- !u!114 &93413269
 MonoBehaviour:
@@ -1036,7 +1037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359506461555085659}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,6 +1071,7 @@ GameObject:
   - component: {fileID: 8603303648574424995}
   - component: {fileID: 4108695208548628697}
   - component: {fileID: 1505737867780000897}
+  - component: {fileID: 4388545744893570372}
   m_Layer: 12
   m_Name: Detector
   m_TagString: Untagged
@@ -1121,6 +1123,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.53
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4388545744893570372
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736570922761035142}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2914621062270672209
 GameObject:
   m_ObjectHideFlags: 0

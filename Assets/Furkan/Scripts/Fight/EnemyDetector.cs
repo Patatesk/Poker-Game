@@ -9,7 +9,13 @@ namespace PK.PokerGame
     {
         [SerializeField] private bool isPlayer;
         public bool enemyDetected;
+        Transform thisObj;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            thisObj = CheckifHasAParent.CheckParent(transform);
+        }
         public override bool Decide()
         {
             return enemyDetected;
@@ -17,10 +23,10 @@ namespace PK.PokerGame
 
         private void OnTriggerEnter(Collider other)
         {
-            Transform otherObj = CheckifHasAParent.CheckParent(other.transform);
-            Transform thisObj = CheckifHasAParent.CheckParent(transform);
-            if (otherObj.CompareTag(TagContainer.AITag))
+
+            if (other.CompareTag(TagContainer.AITag))
             {
+                Transform otherObj = other.transform;
                 if (other.transform.root == transform.root) return;
                 gameObject.GetComponent<Collider>().enabled = false;
                 AI ai = otherObj.transform.root.GetComponent<AI>();
@@ -32,21 +38,25 @@ namespace PK.PokerGame
                 StartAIFightSignal.Trigger(ai, self);
                 enemyDetected = true;
             }
-            else if (otherObj.CompareTag(TagContainer.PlayerTag))
+            else if (other.transform.root.gameObject.layer == 8)
             {
+                Transform otherObj = other.transform.root;
+
                 if (Physics.Raycast(thisObj.position, thisObj.forward, 2))
                 {
-                Debug.Log("Girdi");
-                gameObject.GetComponent<Collider>().enabled = false;
-                Player player = otherObj.GetComponent<Player>();
-                player.ForceToFight();
-                AI self = this.transform.root.GetComponent<AI>();
-                self.ForceToFight();
-                enemyDetected = true;
-                otherObj.gameObject.layer = 9;
-                thisObj.gameObject.layer = 9;
-                StartFightSignal.Trigger(player, self);
-                   
+                    AI self = this.transform.root.GetComponent<AI>();
+                    Player player = otherObj.GetComponent<Player>();
+                    if (self == null || player == null) return;
+                    if (player.isfight) return;
+                    gameObject.GetComponent<Collider>().enabled = false;
+                    player.ForceToFight();
+
+                    self.ForceToFight();
+                    enemyDetected = true;
+                    otherObj.gameObject.layer = 9;
+                    thisObj.gameObject.layer = 9;
+                    StartFightSignal.Trigger(player, self);
+
                 }
             }
 

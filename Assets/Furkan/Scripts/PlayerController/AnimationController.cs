@@ -13,6 +13,7 @@ namespace PK.PokerGame
         [SerializeField] private string deadParameter;
         [SerializeField] private string locomotionParameter;
         [SerializeField] private string Fall = "Fall";
+        [SerializeField] private string victory = "Victory";
         [SerializeField] private float animOfsset;
 
         private void Start()
@@ -25,6 +26,10 @@ namespace PK.PokerGame
             Vector3 rootPos = animator.rootPosition;
             rootPos.y = animOfsset;
             return rootPos;
+        }
+        public void Victory()
+        {
+            animator.SetTrigger(victory);
         }
         public void MoveAnim(bool shouldmove = true, float value = 1)
         {

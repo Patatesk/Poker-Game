@@ -59,6 +59,8 @@ namespace PK.PokerGame
             parent = null;
             siblinIndex = 10;
             toAdd = null;
+            CanSelectableSignal.Trigger(false);
+
         }
 
         public void Discard()
@@ -72,12 +74,12 @@ namespace PK.PokerGame
         }
         private void AddCard(ChangeCardDelivery delivery)
         {
+            if (!fightManager.isFighting) return;
             buttons.SetActive(true);
             if (delivery.isOwnedByPlayer)
             {
                 if (player.TotalCardCount() < 5)
                 {
-                    
                     return;
                 }
                 if (toDiscard != null)

@@ -12,15 +12,14 @@ namespace PK.PokerGame
         public bool fightStarted;
         private void Awake()
         {
-            thisObj = gameObject;
+            thisObj = transform.root.gameObject;
         }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(TagContainer.AITag))
             {
-                otherObj= other.gameObject;
+                otherObj= other.transform.root.gameObject;
                 canFight= true;
-                Debug.Log("Yakaldý");
             }
         }
 
@@ -36,7 +35,6 @@ namespace PK.PokerGame
             if (other.CompareTag(TagContainer.AITag))
             {
                 ResetFight();
-                Debug.Log("çýktý");
             }
         }
 
