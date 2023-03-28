@@ -25,9 +25,10 @@ namespace PK.PokerGame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Card"))
+            if (other.CompareTag(TagContainer.CardTag))
             {
                 Card card = other.GetComponent<Card>();
+                card.gameObject.tag = TagContainer.DefaultTag;
                 handManager.AddCardToHand(card);
                 scale.AnimateScaleTarget = other.transform;
                 position.AnimatePositionTarget = other.gameObject;

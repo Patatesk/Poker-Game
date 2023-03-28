@@ -13,10 +13,12 @@ namespace PK.PokerGame
         [SerializeField] private GameObject[] ClubCardPrefabs;
         [SerializeField] private GameObject[] HeartCardPrefabs;
         [SerializeField] private Transform spawnPoint;
+        private CardSpawnManager spawner;
         private Mediator mediator;
         private void Awake()
         {
             mediator = GameObject.FindAnyObjectByType<Mediator>();
+            spawner = GameObject.FindAnyObjectByType<CardSpawnManager>();
         }
 
         private void OnEnable()
@@ -32,6 +34,13 @@ namespace PK.PokerGame
         {
             GameObject card = Instantiate(FindCard(request.type, request.cardValue), spawnPoint);
             Card script = card.GetComponent<Card>();
+            if (request.forSTartHand)
+            {
+                card = spawner.spawnQueue.Dequeue();
+                script = card.GetComponent<Card>();
+            }
+
+          
             script.forUI = true;
             card.SetActive(false);
             if (request.hand != null)
@@ -83,5 +92,6 @@ namespace PK.PokerGame
         public Transform chooseCardTransform = null;
         public System.Action<Card> addCardToHand;
         public bool isActive = true;
+        public bool forSTartHand;
     }
 }

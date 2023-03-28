@@ -15,19 +15,19 @@ namespace PK.PokerGame
         private HandManager handManager;
         private AnimationController animationController;
         private PlayerController playerController;
-        private EnemyDetector enemyDetector;
+        private PlayerFightStarter fightStarter;
 
         private void Awake()
         {
             handManager = GetComponentInChildren<HandManager>();
             animationController = GetComponentInChildren<AnimationController>();
             playerController= GetComponentInChildren<PlayerController>();
-            enemyDetector= GetComponentInChildren<EnemyDetector>();
+            fightStarter = GetComponentInChildren<PlayerFightStarter>();
         }
 
         private void Update()
         {
-            if (enemyDetector.Decide())
+            if (fightStarter.fightStarted)
             {
                 playerController.canMove= false;
                 animationController.IdleAnim();
@@ -36,10 +36,11 @@ namespace PK.PokerGame
         
         public void FightEnded()
         {
-            enemyDetector.enemyDetected= false;
+            fightStarter.fightStarted= false;
             playerController.canMove= true;
             gameObject.layer = 8;
-            enemyDetector.GetComponent<Collider>().enabled = true;
+            fightStarter.gameObject.layer = 12;
+            fightStarter.GetComponent<Collider>().enabled = true;
 
         }
         public void TouchedObstackle()
@@ -55,17 +56,18 @@ namespace PK.PokerGame
             gameObject.layer =8;
             playerController.applyGravity = true;
             animationController.OpenRootMotion();
-            enemyDetector.GetComponent<BoxCollider>().enabled = true;
+            fightStarter.GetComponent<Collider>().enabled = true;
         }
         public void Lose()
         {
             loseFeedBack.PlayFeedbacks();
             animationController.DeadAnim();
             LoseScreenSignal.Trigger();
-            enemyDetector.GetComponent<BoxCollider>().enabled = false;
+            fightStarter.GetComponent<Collider>().enabled = false;
         }
         public void Win(float time)
         {
+            fightStarter.ResetFight();
             winFeedBack.PlayFeedbacks();
             Invoke("FightEnded", time);
 
@@ -96,7 +98,7 @@ namespace PK.PokerGame
         
         public void ForceToFight()
         {
-            enemyDetector.enemyDetected= true;
+            fightStarter.fightStarted = true;
             animationController.IdleAnim();
             playerController.canMove = false;
         }

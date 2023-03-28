@@ -26,7 +26,7 @@ namespace PK.PokerGame
             rootPos.y = animOfsset;
             return rootPos;
         }
-        public void MoveAnim(bool shouldmove = true, float value = 0)
+        public void MoveAnim(bool shouldmove = true, float value = 1)
         {
             if (animator == null) return;
             animator.SetBool(moveParameter, shouldmove);

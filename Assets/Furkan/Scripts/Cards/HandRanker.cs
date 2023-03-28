@@ -68,7 +68,7 @@ namespace PK.PokerGame
             // Check for four of a kind
             foreach (KeyValuePair<int, int> valueCount in valueCounts)
             {
-                if (valueCount.Value == 4)
+                if (valueCount.Value >= 4)
                     return (8,valueCount.Key); // Four of a Kind
             }
 

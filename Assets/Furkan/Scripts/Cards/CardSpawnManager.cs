@@ -14,7 +14,7 @@ namespace PK.PokerGame
         [SerializeField] private float totalMaxActiveCardCount;
         [SerializeField] private Vector3 spawnRotationOffset = Vector3.zero;
 
-        private Queue<GameObject> spawnQueue = new Queue<GameObject>();
+        public Queue<GameObject> spawnQueue = new Queue<GameObject>();
         private Queue<Transform> SpawnTransformsQueue = new Queue<Transform>();
         private WaitForSeconds spawnTime;
         private int acitveCardCount;
@@ -91,7 +91,7 @@ namespace PK.PokerGame
         private void ReturnQueue(Card card)
         {
             SpawnTransformsQueue.Enqueue(card.spawnPoint);
-            spawnQueue.Enqueue(card.gameObject);
+            //spawnQueue.Enqueue(card.gameObject);
             acitveCardCount--;
             if (acitveCardCount < 0) acitveCardCount = 0;
             

@@ -65,7 +65,7 @@ namespace PK.PokerGame
             aIMove.ToggleCanMove(true);
             stateMachine.TransitionToState("Random");
             ChangeLayer();
-            enemyDetector.GetComponent<BoxCollider>().enabled = true;
+            enemyDetector.GetComponent<Collider>().enabled = true;
             foreach (Collider collider in colliders)
             {
                 collider.enabled = true;
@@ -76,7 +76,7 @@ namespace PK.PokerGame
             animationController.DeadAnim();
             animationController.CloseRootMotion();
             dieFeedBack.PlayFeedbacks();
-            enemyDetector.GetComponent<BoxCollider>().enabled = false;
+            enemyDetector.GetComponent<Collider>().enabled = false;
             DeadAISignal.Trigger();
         }
         public void FightStarted()

@@ -110,6 +110,7 @@ namespace PK.PokerGame
                 request.cardValue = value;
                 request.hand = null;
                 request.chooseCardTransform = null;
+                request.forSTartHand = true;
                 mediator.Publish(request);
             }
         }

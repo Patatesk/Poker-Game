@@ -62,14 +62,13 @@ namespace PK.PokerGame
             }
 
             // Changes the height position of the player..
-
             if (applyGravity)
             {
                 playerVelocity.y += gravityValue * Time.deltaTime;
                 characterController.Move(playerVelocity * Time.deltaTime);
 
             }
-            if (input.Player.RotateAndMove.IsPressed())
+            if (move.magnitude > 0f)
             {
                 anim.MoveAnim();
             }
@@ -77,6 +76,7 @@ namespace PK.PokerGame
             {
                 anim.IdleAnim();
             }
+
         }
 
     }

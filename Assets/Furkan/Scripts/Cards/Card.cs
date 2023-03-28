@@ -143,9 +143,10 @@ namespace PK.PokerGame
                 CollectedEvent();
             }
 
-            if(other.CompareTag(TagContainer.PlayerTag))
-                    _collider.enabled = false;
-
+            if (other.CompareTag(TagContainer.PlayerTag))
+            {
+                _collider.enabled = false;
+            }
         }
     }
 
