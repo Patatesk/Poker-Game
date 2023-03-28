@@ -32,15 +32,10 @@ namespace PK.PokerGame
         private void AddMoney(int value)
         {
             countTo.CountFrom = money;
-            countTo.CountTo = value;
+            money += value;
+            countTo.CountTo = money;
             tempMoney.text= value.ToString();
             addMoneyFeedback.PlayFeedbacks();
-            while (addMoneyFeedback.HasFeedbackStillPlaying())
-            {
-
-            }
-            money = int.Parse(mainMoney.text);
-            
         }
 
 
