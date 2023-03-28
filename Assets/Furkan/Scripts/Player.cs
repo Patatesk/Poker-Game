@@ -9,6 +9,7 @@ namespace PK.PokerGame
     public class Player : MonoBehaviour
     {
         [SerializeField] private float scaleUpAmount = 0.15f;
+        [SerializeField] private int basicIncomePerWin= 100;
         [SerializeField] private MMF_Player winFeedBack;
         [SerializeField] private MMF_Player loseFeedBack;
         
@@ -69,6 +70,7 @@ namespace PK.PokerGame
         {
             fightStarter.ResetFight();
             winFeedBack.PlayFeedbacks();
+            AddMoneySignal.Trigger(basicIncomePerWin);
             Invoke("FightEnded", time);
 
         }

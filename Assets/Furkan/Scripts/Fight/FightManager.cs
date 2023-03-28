@@ -80,14 +80,15 @@ namespace PK.PokerGame
                 string winner = FindWinner(player, fighterAI);
                 if(winner == "Player")
                 {
+                    player.Win(2);
+                    fighterAI.Lose();
                     discardButton.SetActive(true);
                     CanSelectableSignal.Trigger(true);
                     yield return new WaitUntil( () => changeCard == true);
                     pickAcard.SetActive(false);
                     Select2Cards.SetActive(false);
                     discardButton.SetActive(false);
-                    player.Win(2);
-                    fighterAI.Lose();
+                   
                 }
                 else
                 {
