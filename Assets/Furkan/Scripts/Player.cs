@@ -50,6 +50,7 @@ namespace PK.PokerGame
             fightStarter.gameObject.layer = 12;
             fightStarter.GetComponent<Collider>().enabled = true;
         }
+       
         public void TouchedObstackle()
         {
             gameObject.layer = 10;
@@ -78,7 +79,6 @@ namespace PK.PokerGame
             fightStarter.ResetFight();
             winFeedBack.PlayFeedbacks();
             AddMoneySignal.Trigger(basicIncomePerWin);
-            Invoke("FightEnded", time);
 
         }
         

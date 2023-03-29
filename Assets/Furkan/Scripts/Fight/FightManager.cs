@@ -63,9 +63,9 @@ namespace PK.PokerGame
                 fighterAI.FightStarted();
                 fightUI.SetActive(true);
                 _camera.Priority = 15;
-                Turn(player, fighterAI);
 
                 yield return new WaitForSeconds(1f);
+                Turn(player, fighterAI);
                 AýHand.DOAnchorPosY(-500, 1f);
                 AýHand.DOScale(1.2f, 1);
                 playerHand.DOScale(1.2f, 1);
@@ -105,6 +105,7 @@ namespace PK.PokerGame
 
 
                 yield return new WaitForSeconds(1);
+                player.FightEnded();
                 FightIsOver();
             }
         }
@@ -118,14 +119,14 @@ namespace PK.PokerGame
         {
             Vector3 playerLookAtPos = fighterAI.transform.position - player.transform.position;
             Quaternion playerLookAtRot = Quaternion.LookRotation(playerLookAtPos);
-            playerLookAtPos.x = 0;
-            playerLookAtPos.y = 0;
-            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, playerLookAtRot, 1f);
-            Vector3 AýLookAtPos = player.transform.position - fighterAI.transform.position;
+            playerLookAtRot.x = 0;
+            playerLookAtRot.z = 0;
+            player.transform.DORotateQuaternion(playerLookAtRot, .5f);
+            Vector3 AýLookAtPos = player.transform.GetChild(0).position - fighterAI.transform.position;
             Quaternion AýLookAtRot = Quaternion.LookRotation(AýLookAtPos);
             AýLookAtRot.x = 0;
-            AýLookAtRot.y = 0;
-            fighterAI.transform.rotation = Quaternion.Slerp(fighterAI.transform.rotation, AýLookAtRot, 1f);
+            AýLookAtRot.z = 0;
+            fighterAI.transform.DORotateQuaternion(AýLookAtRot, .5f);
         }
 
         private string FindWinner(Player player, AI fighterAI)
