@@ -70,8 +70,15 @@ namespace PK.PokerGame
         {
             loseFeedBack.PlayFeedbacks();
             animationController.DeadAnim();
-            LoseScreenSignal.Trigger();
             fightStarter.GetComponent<Collider>().enabled = false;
+            Invoke("LoseGame", 3);
+
+        }
+
+        private void LoseGame()
+        {
+            LoseScreenSignal.Trigger();
+
         }
         public void Win(float time)
         {
