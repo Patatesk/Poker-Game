@@ -6,8 +6,8 @@ namespace PK.PokerGame
 {
     public static class TagContainer 
     {
-        public static string AITag = "AI";
-        public static string PlayerTag = "Player";
+        public static string AITag = "MainAI";
+        public static string PlayerTag = "MainPlayer";
         public static string DontDisturbTag = "DontDistrupt";
         public static string CardTag = "Card";
         public static string DefaultTag = "Default";

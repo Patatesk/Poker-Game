@@ -138,7 +138,7 @@ namespace PK.PokerGame
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(TagContainer.AITag))
+            if (other.CompareTag(TagContainer.DefaultTag))
             {
                 CollectedEvent();
             }

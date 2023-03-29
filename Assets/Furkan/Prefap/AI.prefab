@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 1734349860}
   m_Layer: 7
   m_Name: AI
-  m_TagString: AI
+  m_TagString: MainAI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1165,7 +1165,7 @@ Transform:
   m_GameObject: {fileID: 2914621062270672209}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
   m_LocalPosition: {x: 0.032999676, y: 0.01000005, z: -0.04300054}
-  m_LocalScale: {x: 1.6818526, y: 1.6818522, z: 1.6818522}
+  m_LocalScale: {x: 1.9792042, y: 1.9792037, z: 1.9792037}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8603303648574424995}
@@ -1551,7 +1551,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}
       propertyPath: m_TagString
-      value: AI
+      value: Default
       objectReference: {fileID: 0}
     - target: {fileID: 1416869042639279608, guid: e3e5ae547ef9fda4889b7d94cd911dca,
         type: 3}

@@ -114,18 +114,18 @@ namespace PK.PokerGame
             changeCard = true;
         }
         
-        private static void Turn(Player player, AI fighterAI)
+        private void Turn(Player player, AI fighterAI)
         {
             Vector3 playerLookAtPos = fighterAI.transform.position - player.transform.position;
             Quaternion playerLookAtRot = Quaternion.LookRotation(playerLookAtPos);
             playerLookAtPos.x = 0;
             playerLookAtPos.y = 0;
-            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, playerLookAtRot, 0.5f);
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, playerLookAtRot, 1f);
             Vector3 AýLookAtPos = player.transform.position - fighterAI.transform.position;
             Quaternion AýLookAtRot = Quaternion.LookRotation(AýLookAtPos);
             AýLookAtRot.x = 0;
             AýLookAtRot.y = 0;
-            fighterAI.transform.rotation = Quaternion.Slerp(fighterAI.transform.rotation, AýLookAtRot, 0.5f);
+            fighterAI.transform.rotation = Quaternion.Slerp(fighterAI.transform.rotation, AýLookAtRot, 1f);
         }
 
         private string FindWinner(Player player, AI fighterAI)

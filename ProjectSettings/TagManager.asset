@@ -11,6 +11,8 @@ TagManager:
   - Ground
   - Deck
   - Default
+  - MainAI
+  - MainPlayer
   layers:
   - Default
   - TransparentFX

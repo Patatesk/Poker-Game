@@ -16,7 +16,7 @@ namespace PK.PokerGame
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(TagContainer.AITag))
+            if (other.gameObject.layer == 7)
             {
                 otherObj= other.transform.root.gameObject;
                 canFight= true;

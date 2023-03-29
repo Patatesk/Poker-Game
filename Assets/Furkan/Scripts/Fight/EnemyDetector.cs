@@ -38,7 +38,7 @@ namespace PK.PokerGame
                 StartAIFightSignal.Trigger(ai, self);
                 enemyDetected = true;
             }
-            else if (other.transform.root.gameObject.layer == 8)
+            else if (other.transform.root.gameObject.layer == 8 && other.CompareTag(TagContainer.PlayerTag))
             {
                 Transform otherObj = other.transform.root;
 
