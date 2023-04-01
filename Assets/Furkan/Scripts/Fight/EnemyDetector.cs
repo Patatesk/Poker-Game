@@ -29,9 +29,9 @@ namespace PK.PokerGame
                 Transform otherObj = other.transform;
                 if (other.transform.root == transform.root) return;
                 gameObject.GetComponent<Collider>().enabled = false;
-                AI ai = otherObj.transform.root.GetComponent<AI>();
+                AI ai = otherObj.transform.GetComponentInParent<AI>();
                 ai.ForceToFight();
-                AI self = this.transform.root.GetComponent<AI>();
+                AI self = this.transform.GetComponentInParent<AI>();
                 self.ForceToFight();
                 otherObj.gameObject.layer = 9;
                 thisObj.gameObject.layer = 9;
@@ -40,17 +40,16 @@ namespace PK.PokerGame
             }
             else if (other.transform.root.gameObject.layer == 8 && other.CompareTag(TagContainer.PlayerTag))
             {
-                Transform otherObj = other.transform.root;
+                Transform otherObj = other.transform;
 
-                if (Physics.Raycast(thisObj.position, thisObj.forward, 2))
+                if (Physics.Raycast(thisObj.position, thisObj.forward, 210))
                 {
-                    AI self = this.transform.root.GetComponent<AI>();
+                    AI self = this.transform.GetComponentInParent<AI>();
                     Player player = otherObj.GetComponent<Player>();
                     if (self == null || player == null) return;
                     if (player.isfight) return;
                     gameObject.GetComponent<Collider>().enabled = false;
                     player.ForceToFight();
-
                     self.ForceToFight();
                     enemyDetected = true;
                     otherObj.gameObject.layer = 9;

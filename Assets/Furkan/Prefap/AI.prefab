@@ -814,7 +814,7 @@ MonoBehaviour:
   locomotionParameter: locomotion
   Fall: Fall
   victory: Victory
-  animOfsset: 1
+  animOfsset: 118.5
 --- !u!114 &93413269
 MonoBehaviour:
   m_ObjectHideFlags: 0

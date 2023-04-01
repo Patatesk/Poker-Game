@@ -12,7 +12,7 @@ namespace PK.PokerGame
         protected override void Awake()
         {
             base.Awake();
-            stateMachine= transform.root.GetComponent<AIStateMachine>();
+            stateMachine= GetComponentInParent<AIStateMachine>();
         }
         public override bool Decide()
         {

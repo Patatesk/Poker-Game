@@ -53,7 +53,7 @@ namespace PK.PokerGame
                 playerVelocity.y = 0f;
             }
             Vector2 moveInput = input.Player.RotateAndMove.ReadValue<Vector2>();
-            Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+            Vector3 move = new Vector3(-moveInput.x, 0, -moveInput.y);
             characterController.Move(move * Time.deltaTime * playerSpeed);
 
             if (move != Vector3.zero)

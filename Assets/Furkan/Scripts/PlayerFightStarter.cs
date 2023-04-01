@@ -18,7 +18,7 @@ namespace PK.PokerGame
         {
             if (other.gameObject.layer == 7)
             {
-                otherObj= other.transform.root.gameObject;
+                otherObj= other.gameObject;
                 canFight= true;
             }
         }
@@ -49,7 +49,7 @@ namespace PK.PokerGame
             if (otherObj == null || thisObj == null) return;
             fightStarted= true;
             gameObject.GetComponent<Collider>().enabled = false;
-            AI ai = otherObj.transform.root.GetComponent<AI>();
+            AI ai = otherObj.GetComponentInParent<AI>();
             ai.ForceToFight();
             otherObj.gameObject.layer = 9;
             thisObj.gameObject.layer = 9;
