@@ -109,7 +109,6 @@ namespace PK.PokerGame
         }
         public void ScaleUp(int totalCardCoun)
         {
-            Debug.Log("Uplandý");
             Vector3 newScale = new Vector3(1 + (scaleUpAmount * totalCardCoun), 1 + (scaleUpAmount * totalCardCoun), 1 + (scaleUpAmount * totalCardCoun));
             transform.GetChild(0).DOScale(newScale, .5f);
         }

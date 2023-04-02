@@ -35,16 +35,22 @@ namespace PK.PokerGame
         private void OnEnable()
         {
             DiscardCardSignal.Discard += Discard;
+            GameStartSignal.gameStart += RequestHand;
         }
         private void OnDisable()
         {
             DiscardCardSignal.Discard -= Discard;
-        }
-      
+            GameStartSignal.gameStart -= RequestHand;
 
-        private  IEnumerator Start()
+        }
+
+        private void RequestHand()
         {
-            yield return new WaitForSeconds(.5f);
+            StartCoroutine(GetHands());
+        }
+        private  IEnumerator GetHands()
+        {
+            yield return new WaitForSeconds(.2f);
             GetRandomTwoCard();
         }
         public void BuildAIHand()
@@ -95,7 +101,17 @@ namespace PK.PokerGame
 
             if (!isPlayer) return;
             if (!card.transform.parent.CompareTag("Deck")) return;
-            hand.Remove(card);
+            Card discard = null;
+            foreach (Card _Card in hand)
+            {
+                if(card.cardValue == _Card.cardValue
+                    && card.cardType == _Card.cardType)
+                {
+                    discard= _Card;
+                    break;
+                }
+            }
+            hand.Remove(discard);
             totalCardCount--;
         }
         private void GetRandomTwoCard()

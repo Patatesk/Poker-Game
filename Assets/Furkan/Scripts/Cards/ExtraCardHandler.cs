@@ -59,7 +59,7 @@ namespace PK.PokerGame
         }
         private void PreventCurrentCardChoosing()
         {
-            CurrentCard.canChoose = false;
+           if(CurrentCard !=null) CurrentCard.canChoose = false;
         }
         private void AddOrDiscardExtraCard(AddExtraCardToHandOrDiscard _addExtraCardToHandOrDiscard)
         {

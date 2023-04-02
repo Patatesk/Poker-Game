@@ -37,9 +37,10 @@ namespace PK.PokerGame
 
                 suitCounts[suit]++;
             }
+        
 
-            // Check for flush
-            foreach (KeyValuePair<CardType, int> suitCount in suitCounts)
+                // Check for flush
+                foreach (KeyValuePair<CardType, int> suitCount in suitCounts)
             {
                 if (suitCount.Value == 5)
                 {

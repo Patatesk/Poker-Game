@@ -30,6 +30,17 @@ namespace PK.PokerGame
             aliveAICount++;
 
         }
+        public void NextScene()
+        {
+            if(SceneManager.sceneCountInBuildSettings -1 >= SceneManager.GetActiveScene().buildIndex + 1)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
         public void RestartScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

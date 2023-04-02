@@ -1,5 +1,6 @@
 using DG.Tweening;
 using MoreMountains.Feedbacks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace PK.PokerGame
             checkFight = GetComponentInChildren<CheckFightIsOver>();
             bound = GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider>();
             agent = GetComponentInChildren<NavMeshAgent>();
+            stateMachine.enabled= false;
         }
         private IEnumerator Start()
         {
@@ -43,6 +45,20 @@ namespace PK.PokerGame
             yield return new WaitForSeconds(0.2f);
             AddAISignal.Trigger();
 
+        }
+
+        private void OnEnable()
+        {
+            GameStartSignal.gameStart += GameStart;
+        }
+        private void OnDisable()
+        {
+            GameStartSignal.gameStart -= GameStart;
+        }
+
+        private void GameStart()
+        {
+            stateMachine.enabled= true;
         }
         
         public void TouchedObstackle()
@@ -70,6 +86,7 @@ namespace PK.PokerGame
             {
                 collider.enabled = true;
             }
+            enemyDetector.isFighting = false;
         }
         public void Lose()
         {
@@ -100,6 +117,7 @@ namespace PK.PokerGame
         }
         public void Win(float time)
         {
+            agent.isStopped = false;
             Invoke("FightEnded", time);
         }
         public int HandRank()
@@ -123,11 +141,22 @@ namespace PK.PokerGame
 
         public void ForceToFight()
         {
+            agent.isStopped = true;
             aIMove.ToggleCanMove(false);
             checkFight.fightIsOver = false;
             enemyDetector.enemyDetected = true;
             animationController.IdleAnim();
            
+        }
+       
+    }
+
+    public static class GameStartSignal
+    {
+        public static event Action gameStart;
+        public static void Trigger()
+        {
+            gameStart?.Invoke();
         }
     }
 }

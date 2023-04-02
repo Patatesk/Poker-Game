@@ -65,12 +65,17 @@ namespace PK.PokerGame
 
         public void Discard()
         {
+            
+            fightManager.CardsChanged();
+            fightManager.ChangeDiscardTime(.2f);
+            if(toAdd != null) toAdd.UnSelect();
+            if(toDiscard != null)toDiscard.UnSelect();
+            buttons.SetActive(false);
             toDiscard = null;
             parent = null;
             siblinIndex = 10;
-            toAdd= null;
-            fightManager.CardsChanged();
-            fightManager.ChangeDiscardTime(.2f);
+            toAdd = null;
+            CanSelectableSignal.Trigger(false);
         }
         private void AddCard(ChangeCardDelivery delivery)
         {

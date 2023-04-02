@@ -56,11 +56,13 @@ namespace PK.PokerGame
             GameObject _card = spawnQueue.Dequeue();
             Card cardScript = _card.GetComponent<Card>();
             Transform cardTransform = SpawnTransformsQueue.Dequeue();
+            if (cardTransform.GetComponent<Check>().hascard) return;
             if (_card == null || cardScript == null || cardTransform == null) return;
             cardScript.spawnPoint = cardTransform;
             _card.transform.position = cardTransform.position;
             _card.transform.rotation = Quaternion.Euler(spawnRotationOffset);
             _card.SetActive(true);
+            cardTransform.GetComponent<Check>().hascard = true;
             acitveCardCount++;
         }
 
@@ -90,11 +92,20 @@ namespace PK.PokerGame
 
         private void ReturnQueue(Card card)
         {
-            SpawnTransformsQueue.Enqueue(card.spawnPoint);
-            //spawnQueue.Enqueue(card.gameObject);
+            if (!SpawnTransformsQueue.Contains(card.spawnPoint) && card.spawnPoint.GetComponent<Check>().hascard)
+            {
+                StartCoroutine(WaitBeforeAdding(card));
+            }
             acitveCardCount--;
             if (acitveCardCount < 0) acitveCardCount = 0;
             
+        }
+
+        IEnumerator WaitBeforeAdding(Card card)
+        {
+            yield return new WaitForSeconds(4);
+            card.spawnPoint.GetComponent<Check>().hascard = false;
+            SpawnTransformsQueue.Enqueue(card.spawnPoint);
         }
 
     }
