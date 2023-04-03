@@ -9,17 +9,7 @@ namespace PK.PokerGame
     {
         [SerializeField] private HandManager handManager;
         [SerializeField] private MMF_Player collectFeedBack;
-        private MMF_Scale scale;
-        private MMF_Position position;
-        private MMF_Events events;
-
-
-        private void Awake()
-        {
-            scale = collectFeedBack.GetFeedbackOfType<MMF_Scale>();
-            position = collectFeedBack.GetFeedbackOfType<MMF_Position>();
-            events = collectFeedBack.GetFeedbackOfType<MMF_Events>();
-        }
+     
 
 
 
@@ -28,12 +18,9 @@ namespace PK.PokerGame
             if (other.CompareTag(TagContainer.CardTag))
             {
                 Card card = other.GetComponent<Card>();
-                card.gameObject.tag = TagContainer.DefaultTag;
+                card.ForceToCollect();
                 handManager.AddCardToHand(card);
-                scale.AnimateScaleTarget = other.transform;
-                position.AnimatePositionTarget = other.gameObject;
-                events.PlayEvents.AddListener(card.CollectedEvent) ;
-                collectFeedBack.PlayFeedbacks();
+               
             }
         }
     }

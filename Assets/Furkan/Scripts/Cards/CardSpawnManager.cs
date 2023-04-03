@@ -58,6 +58,7 @@ namespace PK.PokerGame
             Transform cardTransform = SpawnTransformsQueue.Dequeue();
             if (cardTransform.GetComponent<Check>().hascard) return;
             if (_card == null || cardScript == null || cardTransform == null) return;
+            _card.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             cardScript.spawnPoint = cardTransform;
             _card.transform.position = cardTransform.position;
             _card.transform.rotation = Quaternion.Euler(spawnRotationOffset);

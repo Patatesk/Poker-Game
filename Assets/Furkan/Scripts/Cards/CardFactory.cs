@@ -45,6 +45,7 @@ namespace PK.PokerGame
             card.SetActive(false);
             if (request.hand != null)
             {
+                card.transform.position = request.hand.transform.GetChild(0).position;
                 card.transform.SetParent(request.hand.transform.GetChild(0));
                 card.transform.SetSiblingIndex(request.hand.ReturnEmptySpace());
                 card.SetActive(request.isActive);

@@ -19,6 +19,7 @@ namespace PK.PokerGame
         private bool useForUI;
         public MMF_Player discardFeedback;
         [SerializeField] private MMF_Player forwardFaceAnim;
+        [SerializeField] private MMF_Player OnPickUp;
         public bool canChoose;
         public bool WinPirze = false;
         private float startPos;
@@ -134,19 +135,22 @@ namespace PK.PokerGame
         public void CollectedEvent()
         {
             GetBackQueueSignal.Trigger(this);
-            this.gameObject.SetActive(false);
         }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(TagContainer.DefaultTag))
             {
+                OnPickUp.PlayFeedbacks();
                 CollectedEvent();
             }
 
-            if (other.CompareTag(TagContainer.PlayerTag))
-            {
-                _collider.enabled = false;
-            }
+        }
+
+        public void ForceToCollect()
+        {
+            OnPickUp.PlayFeedbacks();
+            CollectedEvent();
+            _collider.enabled = false;
         }
     }
 
