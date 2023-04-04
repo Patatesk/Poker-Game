@@ -13,6 +13,7 @@ namespace PK.PokerGame
         [SerializeField] private Transform rayPoint2;
         [SerializeField] private Transform rayPoint3;
         [SerializeField] private Transform rayPoint4;
+        [SerializeField] private SpriteRenderer circler;
         public bool enemyDetected;
         Transform thisObj;
         public bool isFighting;
@@ -45,10 +46,16 @@ namespace PK.PokerGame
                 StartAIFightSignal.Trigger(ai, self);
                 enemyDetected = true;
                 isFighting = true;
+                circler.color = Color.red;
             }
            
 
 
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagContainer.AITag) && other.gameObject.layer == 7) circler.color = Color.white;
+            if (other.transform.root.gameObject.layer == 8 && other.CompareTag(TagContainer.PlayerTag)) circler.color = Color.white;
         }
 
         private void OnTriggerStay(Collider other)
@@ -57,10 +64,10 @@ namespace PK.PokerGame
             if (other.transform.root.gameObject.layer == 8 && other.CompareTag(TagContainer.PlayerTag))
             {
                 Transform otherObj = other.transform;
-
-                if (Physics.Raycast(thisObj.position, thisObj.forward, 2, mask) 
-                    || Physics.Raycast(rayPoint1.position, rayPoint1.forward, 2, mask) ||
-                    Physics.Raycast(rayPoint2.position, rayPoint2.forward, 2, mask)
+                circler.color = Color.red;
+                if (   Physics.Raycast(thisObj.position, thisObj.forward, 2, mask) 
+                    || Physics.Raycast(rayPoint1.position, rayPoint1.forward, 2, mask)
+                    || Physics.Raycast(rayPoint2.position, rayPoint2.forward, 2, mask)
                     || Physics.Raycast(rayPoint3.position, rayPoint3.forward, 2, mask)
                     || Physics.Raycast(rayPoint4.position, rayPoint4.forward, 2, mask))
                 {
