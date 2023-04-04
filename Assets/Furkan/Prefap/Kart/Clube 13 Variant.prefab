@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 762922696983602273, guid: 26d61c8324368aa4b92f9e3597abd977,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fcae31dd24676534aa3a8023a5047624,
+        type: 3}
     - target: {fileID: 855025144562928790, guid: 26d61c8324368aa4b92f9e3597abd977,
         type: 3}
       propertyPath: m_Sprite
@@ -66,6 +72,11 @@ PrefabInstance:
     - target: {fileID: 2374085043869540770, guid: 26d61c8324368aa4b92f9e3597abd977,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611484186539435753, guid: 26d61c8324368aa4b92f9e3597abd977,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3699298333678347831, guid: 26d61c8324368aa4b92f9e3597abd977,

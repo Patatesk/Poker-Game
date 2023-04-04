@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,9 +9,10 @@ namespace PK.PokerGame
 {
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI AýCounter;
         private int totalAICaount;
         private int aliveAICount;
-
+        private List<Transform> ailist = new List<Transform>();
 
         private void OnEnable()
         {
@@ -24,11 +26,17 @@ namespace PK.PokerGame
             DeadAISignal.DeadAI -= DeadAI;
         }
 
-        private void AddAI()
+        private void AddAI(Transform ai)
         {
             totalAICaount++;
             aliveAICount++;
+            SetAýCounterText();
+            ailist.Add(ai);
+        }
 
+        private void SetAýCounterText()
+        {
+            AýCounter.text =  aliveAICount + "/" +totalAICaount.ToString();
         }
         public void NextScene()
         {
@@ -46,10 +54,13 @@ namespace PK.PokerGame
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        private void DeadAI()
+        private void DeadAI(Transform ai)
         {
             aliveAICount--;
-            if(aliveAICount == 0)
+            SetAýCounterText();
+            ailist.Remove(ai);
+            if (aliveAICount == 1) ShowIndicatorSginal.Trigger(true, ailist[0]);
+            if (aliveAICount == 0)
             {
                 WinsScreenSginal.Trigger();
             }
@@ -58,19 +69,19 @@ namespace PK.PokerGame
 
     public class AddAISignal
     {
-        public static event Action AddAI;
-        public static void Trigger()
+        public static event Action<Transform> AddAI;
+        public static void Trigger(Transform ai)
         {
-            AddAI?.Invoke();
+            AddAI?.Invoke(ai);
         }
     }
 
     public class DeadAISignal
     {
-        public static event Action DeadAI;
-        public static void Trigger()
+        public static event Action<Transform> DeadAI;
+        public static void Trigger(Transform ai)
         {
-            DeadAI?.Invoke();
+            DeadAI?.Invoke(ai);
         }
     }
 }

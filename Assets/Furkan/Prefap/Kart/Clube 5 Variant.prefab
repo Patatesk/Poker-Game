@@ -23,6 +23,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b1e18b9f9eb854e4d9d1949ca8598309,
         type: 3}
+    - target: {fileID: 4874815984111885877, guid: 459dc2fc1af787749a110a1c80a5735b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1e18b9f9eb854e4d9d1949ca8598309,
+        type: 3}
     - target: {fileID: 7620882960992017398, guid: 459dc2fc1af787749a110a1c80a5735b,
         type: 3}
       propertyPath: m_RootOrder
@@ -88,6 +94,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cardValue
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876085595910659261, guid: 459dc2fc1af787749a110a1c80a5735b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 459dc2fc1af787749a110a1c80a5735b, type: 3}

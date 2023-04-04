@@ -43,7 +43,7 @@ namespace PK.PokerGame
         {
             random.boundRange = bound;
             yield return new WaitForSeconds(0.2f);
-            AddAISignal.Trigger();
+            AddAISignal.Trigger(transform);
 
         }
 
@@ -94,7 +94,7 @@ namespace PK.PokerGame
             animationController.CloseRootMotion();
             dieFeedBack.PlayFeedbacks();
             enemyDetector.GetComponent<Collider>().enabled = false;
-            DeadAISignal.Trigger();
+            DeadAISignal.Trigger(transform);
         }
         public void FightStarted()
         {

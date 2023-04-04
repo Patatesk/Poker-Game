@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: cardValue
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 80479722675749393, guid: 65643a91de15c6c4fb4821e512ac93c9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 883931554208624593, guid: 65643a91de15c6c4fb4821e512ac93c9,
         type: 3}
       propertyPath: m_Sprite
@@ -74,6 +79,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4097944212586702958, guid: 65643a91de15c6c4fb4821e512ac93c9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 74e88b12f0fddc240b89d5f0ae6e95eb,
+        type: 3}
+    - target: {fileID: 4149231962707460249, guid: 65643a91de15c6c4fb4821e512ac93c9,
         type: 3}
       propertyPath: m_Sprite
       value: 

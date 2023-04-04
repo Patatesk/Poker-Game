@@ -9,7 +9,8 @@ namespace PK.PokerGame
        Heart,
        Diamond,
        Spade,
-       Clube
+       Clube,
+       None
     }
 
     
