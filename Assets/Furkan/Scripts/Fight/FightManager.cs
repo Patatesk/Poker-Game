@@ -166,11 +166,24 @@ namespace PK.PokerGame
                     }
                     return "Player";
                 }
+                else if (player.BiggestNumber() == fighterAI.BiggestNumber())
+                {
+                    if(player.TotalCardCount() < 5)
+                    {
+                        Select1CardFeedback.PlayFeedbacks();
+                    }
+                    else
+                    {
+                        Select2CardsFeedback.PlayFeedbacks();
+                    }
+                    return "Player";
+
+                }
                 else
                 {
                     youLose.SetActive(true);
-                    
                     return "AI";
+
                 }
             }
         }

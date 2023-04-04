@@ -6,6 +6,7 @@ namespace PK.PokerGame
 {
     public class PlayerFightStarter : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer circle;
         private bool canFight;
         private GameObject otherObj;
         private GameObject thisObj;
@@ -18,14 +19,15 @@ namespace PK.PokerGame
         {
             if (other.gameObject.layer == 7)
             {
-                otherObj= other.gameObject;
-                canFight= true;
+                circle.color = Color.red;
+                otherObj = other.gameObject;
+                canFight = true;
             }
         }
 
         private void Update()
         {
-            if(Input.GetMouseButtonUp(0) && canFight && !fightStarted)
+            if (Input.GetMouseButtonUp(0) && canFight && !fightStarted)
             {
                 StartFight();
             }
@@ -34,6 +36,7 @@ namespace PK.PokerGame
         {
             if (other.CompareTag(TagContainer.AITag))
             {
+                circle.color = Color.white;
                 ResetFight();
             }
         }
@@ -47,7 +50,7 @@ namespace PK.PokerGame
         private void StartFight()
         {
             if (otherObj == null || thisObj == null) return;
-            fightStarted= true;
+            fightStarted = true;
             gameObject.GetComponent<Collider>().enabled = false;
             AI ai = otherObj.GetComponentInParent<AI>();
             ai.ForceToFight();
